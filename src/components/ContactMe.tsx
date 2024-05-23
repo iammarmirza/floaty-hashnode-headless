@@ -1,5 +1,6 @@
-import { ArrowRightIcon } from "@heroicons/react/24/outline"
+import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 import { SocialLinks } from "./SocialLinks"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export const ContactMe = () => {
     return (
@@ -7,7 +8,7 @@ export const ContactMe = () => {
             <h2 className="text-2xl lg:text-3xl font-semibold">Have a Project Idea?</h2>
             <button className="flex text-md flex-row gap-2 items-center bg-slate-800 text-white px-4 py-2 rounded-3xl hover:gap-3 hover:opacity-75">
                 Let's Connect
-                <ArrowRightIcon className="h-6 w-6" />
+                <FontAwesomeIcon icon={faArrowRight}/>
             </button>
             <SocialLinks />
             <p className="text-slate-500 text-sm">Made by <a href="//twitter.com/iammarmirza" target="_blank">Ammar Mirza</a></p>

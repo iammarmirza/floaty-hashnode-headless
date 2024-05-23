@@ -1,21 +1,36 @@
-import { InboxIcon, LinkIcon, RocketLaunchIcon, TrophyIcon } from "@heroicons/react/24/outline"
+'use client'
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useQuery } from "@tanstack/react-query";
+import request from "graphql-request";
+import { PublicationDocument, PublicationLinks } from "@/gql/graphql";
+import { faFaceAngry } from "@fortawesome/free-solid-svg-icons";
+import { SOCIAL_LINKS } from "@/utils/constants";
 
 export const SocialLinks = () => {
-    return (
-        <div className="flex flex-row gap-4">
-            <div className="p-2 rounded-full shadow-sm">
-            <InboxIcon className="h-4 w-4 text-slate-500" />
-            </div>
-            <div className="p-2 rounded-full shadow-sm shadow-slate-100">
-            <LinkIcon className="h-4 w-4 text-slate-500" />
-            </div>
-            <div className="p-2 rounded-full shadow-sm shadow-slate-100">
-            <RocketLaunchIcon className="h-4 w-4 text-slate-500" />
-            </div>
-            <div className="p-2 rounded-full shadow-sm shadow-slate-100">
-            <TrophyIcon className="h-4 w-4 text-slate-500" />
-            </div>
+    const { data } = useQuery({
+        queryKey: ['PublicationInfo'],
+        queryFn: async () =>
+            request("https://gql.hashnode.com/",
+                PublicationDocument,
+                {
+                    host: "ammarmirza.hashnode.dev"
+                }
+            )
+    })
 
+    if(!data?.publication?.links) return null
+    const links = Object.entries(data.publication.links).filter(([key, value]) => value)
+    
+    return (
+        <div className="flex flex-wrap gap-3 md:gap-4">
+            {
+                links.map(([socialName, socialLink]) => (
+                    <a href={socialLink as string} target="_blank" className="flex p-1 md:p-3 rounded-full shadow-sm" key={socialName}>
+                        <FontAwesomeIcon icon={SOCIAL_LINKS[socialName]} className="h-4 w-4 md:h-6 md:w-6" />
+                    </a>
+                ))
+            }
         </div>
     )
 }

@@ -3,6 +3,7 @@
 import Link from "next/link"
 import { NAVLINKS } from "@/utils/constants"
 import { usePathname } from "next/navigation"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export const Navbar = () => {
     const path = usePathname()
@@ -11,8 +12,8 @@ export const Navbar = () => {
             <div className="px-5 py-3 border rounded-full bg-slate-100 flex flex-row gap-3">
                 {
                     NAVLINKS.map(navlink => (
-                        <Link href={navlink.href} key={navlink.name} className={`p-4 rounded-full shadow-sm ${path === navlink.href ? 'bg-slate-300': 'bg-white'}`}>
-                            {navlink.icon}
+                        <Link href={navlink.href} key={navlink.name} className={`p-3 rounded-full shadow-sm ${path === navlink.href ? 'bg-slate-300': 'bg-white'}`}>
+                            <FontAwesomeIcon icon={navlink.icon} className="h-6 w-6"/>
                         </Link>
                     ))
                 }
