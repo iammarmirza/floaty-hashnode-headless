@@ -7,8 +7,7 @@ export default function Blog () {
             <div className="bg-white rounded-3xl px-5 py-5 flex-col flex gap-5 items-center">
                 <h1 className="text-3xl md:text-4xl font-semibold text-slate-800">Blogs</h1>
                 <div className="flex flex-wrap justify-center gap-5 w-full">
-                    <SingleBlog />
-                    <SingleBlog />
+                    
                 </div>
             </div>
             <ContactMe />

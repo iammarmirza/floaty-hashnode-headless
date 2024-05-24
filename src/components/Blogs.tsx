@@ -1,9 +1,26 @@
+'use client'
 import { SingleBlog } from "./SingleBlog"
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { useQuery } from "@tanstack/react-query"
+import { PublicationDocument } from "@/gql/graphql"
+import request from "graphql-request"
 
 export const Blogs = () => {
+    const { data } = useQuery({
+        queryKey: ['PublicationInfo'],
+        queryFn: async () =>
+            request("https://gql.hashnode.com/",
+                PublicationDocument,
+                {
+                    host: "ammarmirza.hashnode.dev"
+                }
+            )
+    })
+
+    if(!data || !data.publication) return null
+
     return(
         <div className="bg-white w-full shadow-lg rounded-3xl p-6 md:p-8 flex flex-col items-start">
             <div className="w-full flex flex-row justify-between items-center mb-6">
@@ -15,8 +32,11 @@ export const Blogs = () => {
                 </Link>
             </div>
             <div className="w-full gap-5 flex flex-col sm:flex-row sm:justify-center md:gap-8">
-                <SingleBlog />
-                <SingleBlog />
+                {
+                    data.publication.posts.edges.map(edge => (
+                        <SingleBlog blogInfo={edge.node} key={edge.node.id}/>
+                    ))
+                }
             </div>
             <Link
                     href={'/blog'}

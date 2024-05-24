@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useQuery } from "@tanstack/react-query";
 import request from "graphql-request";
 import { PublicationDocument, PublicationLinks } from "@/gql/graphql";
-import { faFaceAngry } from "@fortawesome/free-solid-svg-icons";
 import { SOCIAL_LINKS } from "@/utils/constants";
 
 export const SocialLinks = () => {
