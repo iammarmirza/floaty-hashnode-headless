@@ -1,5 +1,5 @@
-/* eslint-disable */
-import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/core';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
+import { fetchData } from '../src/utils/reactQueryFetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -14,9 +14,7 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
   DateTime: { input: any; output: any; }
-  /** A field whose value conforms with the standard mongodb object Id as described here: https://docs.mongodb.com/manual/reference/method/ObjectId/#ObjectId. Example: 5e5677d71bdc2ae76344968c */
   ObjectId: { input: any; output: any; }
   URL: { input: any; output: any; }
 };
@@ -3272,6 +3270,7 @@ export enum Scope {
   UpdateReply = 'update_reply',
   WebhookAdmin = 'webhook_admin',
   WriteDraft = 'write_draft',
+  WriteDraftRevision = 'write_draft_revision',
   WritePost = 'write_post',
   WriteSeries = 'write_series',
   WriteStaticPage = 'write_static_page',
@@ -4146,4 +4145,78 @@ export type PublicationQueryVariables = Exact<{
 export type PublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, links?: { __typename?: 'PublicationLinks', instagram?: string | null, github?: string | null, website?: string | null, hashnode?: string | null, youtube?: string | null, linkedin?: string | null, mastodon?: string | null } | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, slug: string, title: string, brief: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }> }, author: { __typename?: 'User', name: string, profilePicture?: string | null, location?: string | null, bio?: { __typename?: 'Content', html: string } | null } } | null };
 
 
-export const PublicationDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Publication"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"host"}},"type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"publication"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"host"},"value":{"kind":"Variable","name":{"kind":"Name","value":"host"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"links"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"instagram"}},{"kind":"Field","name":{"kind":"Name","value":"github"}},{"kind":"Field","name":{"kind":"Name","value":"website"}},{"kind":"Field","name":{"kind":"Name","value":"hashnode"}},{"kind":"Field","name":{"kind":"Name","value":"youtube"}},{"kind":"Field","name":{"kind":"Name","value":"linkedin"}},{"kind":"Field","name":{"kind":"Name","value":"mastodon"}}]}},{"kind":"Field","name":{"kind":"Name","value":"posts"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"first"},"value":{"kind":"IntValue","value":"2"}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"edges"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"node"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"slug"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"brief"}},{"kind":"Field","name":{"kind":"Name","value":"coverImage"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"url"}}]}}]}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"author"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"bio"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"html"}}]}},{"kind":"Field","name":{"kind":"Name","value":"profilePicture"}},{"kind":"Field","name":{"kind":"Name","value":"location"}}]}}]}}]}}]} as unknown as DocumentNode<PublicationQuery, PublicationQueryVariables>;
+
+export const PublicationDocument = `
+    query Publication($host: String) {
+  publication(host: $host) {
+    id
+    links {
+      instagram
+      github
+      website
+      hashnode
+      youtube
+      linkedin
+      mastodon
+    }
+    posts(first: 2) {
+      edges {
+        node {
+          id
+          slug
+          title
+          brief
+          coverImage {
+            url
+          }
+        }
+      }
+    }
+    author {
+      name
+      bio {
+        html
+      }
+      profilePicture
+      location
+    }
+  }
+}
+    `;
+
+export const usePublicationQuery = <
+      TData = PublicationQuery,
+      TError = unknown
+    >(
+      variables?: PublicationQueryVariables,
+      options?: UseQueryOptions<PublicationQuery, TError, TData>
+    ) => {
+    
+    return useQuery<PublicationQuery, TError, TData>(
+      variables === undefined ? ['Publication'] : ['Publication', variables],
+      fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, variables),
+      options
+    )};
+
+usePublicationQuery.document = PublicationDocument;
+
+usePublicationQuery.getKey = (variables?: PublicationQueryVariables) => variables === undefined ? ['Publication'] : ['Publication', variables];
+
+export const useInfinitePublicationQuery = <
+      TData = PublicationQuery,
+      TError = unknown
+    >(
+      variables?: PublicationQueryVariables,
+      options?: UseInfiniteQueryOptions<PublicationQuery, TError, TData>
+    ) => {
+    
+    return useInfiniteQuery<PublicationQuery, TError, TData>(
+      variables === undefined ? ['Publication.infinite'] : ['Publication.infinite', variables],
+      (metaData) => fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      options
+    )};
+
+useInfinitePublicationQuery.getKey = (variables?: PublicationQueryVariables) => variables === undefined ? ['Publication.infinite'] : ['Publication.infinite', variables];
+
+
+usePublicationQuery.fetcher = (variables?: PublicationQueryVariables, options?: RequestInit['headers']) => fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, variables, options);

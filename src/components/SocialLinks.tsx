@@ -1,21 +1,12 @@
 'use client'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { useQuery } from "@tanstack/react-query";
-import request from "graphql-request";
-import { PublicationDocument, PublicationLinks } from "@/gql/graphql";
 import { SOCIAL_LINKS } from "@/utils/constants";
+import { usePublicationQuery } from "../../generated/graphq";
 
 export const SocialLinks = () => {
-    const { data } = useQuery({
-        queryKey: ['PublicationInfo'],
-        queryFn: async () =>
-            request("https://gql.hashnode.com/",
-                PublicationDocument,
-                {
-                    host: "ammarmirza.hashnode.dev"
-                }
-            )
+    const { data } = usePublicationQuery({
+        host: "ammarmirza.hashnode.dev"
     })
 
     if(!data?.publication?.links) return null

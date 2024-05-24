@@ -3,24 +3,15 @@ import Image from "next/image"
 import { SocialLinks } from "./SocialLinks"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { useQuery } from "@tanstack/react-query";
-import request from "graphql-request";
-import { PublicationDocument } from "@/gql/graphql";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { usePublicationQuery } from "../../generated/graphq"
 
 export const AboutMe = () => {
     const path = usePathname()
     
-    const { data, isLoading } = useQuery({
-        queryKey: ['PublicationInfo'],
-        queryFn: async () =>
-            request("https://gql.hashnode.com/",
-                PublicationDocument,
-                {
-                    host: "ammarmirza.hashnode.dev"
-                }
-            )
+    const { data, isLoading } = usePublicationQuery({
+        host: "ammarmirza.hashnode.dev"
     })
     
     if(!data || !data.publication) return null

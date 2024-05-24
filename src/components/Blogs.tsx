@@ -3,20 +3,11 @@ import { SingleBlog } from "./SingleBlog"
 import Link from "next/link"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
-import { useQuery } from "@tanstack/react-query"
-import { PublicationDocument } from "@/gql/graphql"
-import request from "graphql-request"
+import { usePublicationQuery } from "../../generated/graphq"
 
 export const Blogs = () => {
-    const { data } = useQuery({
-        queryKey: ['PublicationInfo'],
-        queryFn: async () =>
-            request("https://gql.hashnode.com/",
-                PublicationDocument,
-                {
-                    host: "ammarmirza.hashnode.dev"
-                }
-            )
+    const { data } = usePublicationQuery({
+        host: "ammarmirza.hashnode.dev"
     })
 
     if(!data || !data.publication) return null
