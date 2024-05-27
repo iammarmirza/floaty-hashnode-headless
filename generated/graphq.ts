@@ -1,4 +1,4 @@
-import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, InfiniteData } from '@tanstack/react-query';
 import { fetchData } from '../src/utils/reactQueryFetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
@@ -1084,6 +1084,8 @@ export type DraftFeatures = {
 
 export type DraftRevision = Node & {
   __typename?: 'DraftRevision';
+  /** The name of the user who created the revision. */
+  authorName: Scalars['String']['output'];
   /** The content of the draft revision. */
   content: Content;
   /** The time the revision has been created. */
@@ -4137,6 +4139,15 @@ export type WidgetPinSettings = {
   location: WidgetPinLocation;
 };
 
+export type PostsQueryVariables = Exact<{
+  host?: InputMaybe<Scalars['String']['input']>;
+  pageSize: Scalars['Int']['input'];
+  page: Scalars['Int']['input'];
+}>;
+
+
+export type PostsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', postsViaPage: { __typename?: 'PublicationPostPageConnection', nodes: Array<{ __typename?: 'Post', id: string, slug: string, title: string, views: number, publishedAt: any, coverImage?: { __typename?: 'PostCoverImage', url: string } | null }>, pageInfo: { __typename?: 'OffsetPageInfo', hasNextPage?: boolean | null, nextPage?: number | null } } } | null };
+
 export type PublicationQueryVariables = Exact<{
   host?: InputMaybe<Scalars['String']['input']>;
 }>;
@@ -4145,6 +4156,73 @@ export type PublicationQueryVariables = Exact<{
 export type PublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, links?: { __typename?: 'PublicationLinks', instagram?: string | null, github?: string | null, website?: string | null, hashnode?: string | null, youtube?: string | null, linkedin?: string | null, mastodon?: string | null } | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, slug: string, title: string, brief: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }> }, author: { __typename?: 'User', name: string, profilePicture?: string | null, location?: string | null, bio?: { __typename?: 'Content', html: string } | null } } | null };
 
 
+
+export const PostsDocument = `
+    query Posts($host: String, $pageSize: Int!, $page: Int!) {
+  publication(host: $host) {
+    postsViaPage(pageSize: $pageSize, page: $page) {
+      nodes {
+        id
+        slug
+        title
+        views
+        coverImage {
+          url
+        }
+        publishedAt
+      }
+      pageInfo {
+        hasNextPage
+        nextPage
+      }
+    }
+  }
+}
+    `;
+
+export const usePostsQuery = <
+      TData = PostsQuery,
+      TError = unknown
+    >(
+      variables: PostsQueryVariables,
+      options?: Omit<UseQueryOptions<PostsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<PostsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<PostsQuery, TError, TData>(
+      {
+    queryKey: ['Posts', variables],
+    queryFn: fetchData<PostsQuery, PostsQueryVariables>(PostsDocument, variables),
+    ...options
+  }
+    )};
+
+usePostsQuery.document = PostsDocument;
+
+usePostsQuery.getKey = (variables: PostsQueryVariables) => ['Posts', variables];
+
+export const useInfinitePostsQuery = <
+      TData = InfiniteData<PostsQuery>,
+      TError = unknown
+    >(
+      variables: PostsQueryVariables,
+      options: Omit<UseInfiniteQueryOptions<PostsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<PostsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useInfiniteQuery<PostsQuery, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? ['Posts.infinite', variables],
+      queryFn: (metaData) => fetchData<PostsQuery, PostsQueryVariables>(PostsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      ...restOptions
+    }
+  })()
+    )};
+
+useInfinitePostsQuery.getKey = (variables: PostsQueryVariables) => ['Posts.infinite', variables];
+
+
+usePostsQuery.fetcher = (variables: PostsQueryVariables, options?: RequestInit['headers']) => fetchData<PostsQuery, PostsQueryVariables>(PostsDocument, variables, options);
 
 export const PublicationDocument = `
     query Publication($host: String) {
@@ -4189,13 +4267,15 @@ export const usePublicationQuery = <
       TError = unknown
     >(
       variables?: PublicationQueryVariables,
-      options?: UseQueryOptions<PublicationQuery, TError, TData>
+      options?: Omit<UseQueryOptions<PublicationQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<PublicationQuery, TError, TData>['queryKey'] }
     ) => {
     
     return useQuery<PublicationQuery, TError, TData>(
-      variables === undefined ? ['Publication'] : ['Publication', variables],
-      fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, variables),
-      options
+      {
+    queryKey: variables === undefined ? ['Publication'] : ['Publication', variables],
+    queryFn: fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, variables),
+    ...options
+  }
     )};
 
 usePublicationQuery.document = PublicationDocument;
@@ -4203,17 +4283,22 @@ usePublicationQuery.document = PublicationDocument;
 usePublicationQuery.getKey = (variables?: PublicationQueryVariables) => variables === undefined ? ['Publication'] : ['Publication', variables];
 
 export const useInfinitePublicationQuery = <
-      TData = PublicationQuery,
+      TData = InfiniteData<PublicationQuery>,
       TError = unknown
     >(
-      variables?: PublicationQueryVariables,
-      options?: UseInfiniteQueryOptions<PublicationQuery, TError, TData>
+      variables: PublicationQueryVariables,
+      options: Omit<UseInfiniteQueryOptions<PublicationQuery, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<PublicationQuery, TError, TData>['queryKey'] }
     ) => {
     
     return useInfiniteQuery<PublicationQuery, TError, TData>(
-      variables === undefined ? ['Publication.infinite'] : ['Publication.infinite', variables],
-      (metaData) => fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, {...variables, ...(metaData.pageParam ?? {})})(),
-      options
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? variables === undefined ? ['Publication.infinite'] : ['Publication.infinite', variables],
+      queryFn: (metaData) => fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      ...restOptions
+    }
+  })()
     )};
 
 useInfinitePublicationQuery.getKey = (variables?: PublicationQueryVariables) => variables === undefined ? ['Publication.infinite'] : ['Publication.infinite', variables];

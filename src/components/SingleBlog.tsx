@@ -10,6 +10,7 @@ interface SingleBlogProps {
         slug: string;
         title: string;
         brief: string;
+        publishedAt?: any;
         coverImage?: {
             __typename?: "PostCoverImage" | undefined;
             url: string;
@@ -20,7 +21,7 @@ interface SingleBlogProps {
 export const SingleBlog = (props : SingleBlogProps) => {
     const { brief, title, slug} = props.blogInfo
     return (
-        <Link href={`/blog/${slug}`} className="w-full px-4 py-4 rounded-2xl border-2 shadow-sm sm:max-w-72 hover:shadow-md group md:max-w-80 lg:max-w-96 items-center">
+        <Link href={`/blog/${slug}`} className="w-full px-4 py-4 rounded-2xl border border-zinc-100 sm:max-w-72 hover:shadow-md group md:max-w-80 lg:max-w-96 items-center">
             <div className="relative flex flex-col gap-3 w-full">
                 <div className="flex w-full aspect-video border rounded-xl overflow-hidden">
                     <Image src={props.blogInfo.coverImage?.url || ''} width={1000} height={1000} alt="Project Image" className="flex-1" />

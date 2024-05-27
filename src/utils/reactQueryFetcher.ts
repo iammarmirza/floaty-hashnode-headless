@@ -3,7 +3,7 @@ export const fetchData = <TData, TVariables>(
     variables?: TVariables,
     options?: RequestInit['headers'],
   ): (() => Promise<TData>) => {
-    const url = "https://gql.hashnode.com"
+    const url = process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT as string
     return async () => {
       const res = await fetch(url, {
         method: 'POST',

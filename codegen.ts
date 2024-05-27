@@ -1,7 +1,8 @@
+require("dotenv").config();
 import { CodegenConfig } from '@graphql-codegen/cli';
 
 const config: CodegenConfig = {
-  schema: 'https://gql.hashnode.com/',
+  schema: process.env.NEXT_PUBLIC_HASHNODE_GQL_ENDPOINT,
   documents: ['src/**/*.graphql'],
   generates: {
     './generated/graphq.ts': {
@@ -11,10 +12,11 @@ const config: CodegenConfig = {
           func: "../src/utils/reactQueryFetcher#fetchData"
         },
         exposeDocument: true,
-       exposeQueryKeys: true,
-       exposeFetcher: true,
-       exposeMutationKeys: true,
-       addInfiniteQuery: true,
+        exposeQueryKeys: true,
+        exposeFetcher: true,
+        exposeMutationKeys: true,
+        addInfiniteQuery: true,
+        reactQueryVersion: 5
       }
     },
   }

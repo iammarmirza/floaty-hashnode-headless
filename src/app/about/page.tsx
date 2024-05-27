@@ -4,7 +4,7 @@ import { AboutMe } from "@/components/AboutMe"
 export default function About () {
     return(
         <Container>
-            slamslma
+            This is the about page...
         </Container>
     )
 }

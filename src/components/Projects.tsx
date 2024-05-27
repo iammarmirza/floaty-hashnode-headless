@@ -5,12 +5,12 @@ import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
 
 export const Projects = () => {
     return (
-        <div className="bg-white w-full shadow-lg rounded-3xl p-6 md:p-8 flex flex-col">
+        <div className="bg-white w-full shadow-lg rounded-3xl p-6 flex flex-col">
             <div className="w-full flex flex-row justify-between items-center mb-6">
-                <h2 className="text-2xl sm:text-3xl font-semibold text-slate-800">Projects</h2>
+                <h2 className="text-2xl font-semibold text-slate-800">Projects</h2>
                 <Link
                     href={'/project'}
-                    className="hidden md:flex text-sm flex-row items-center gap-2 rounded-full shadow-sm px-4 py-2 hover:bg-slate-600 hover:text-white hover:gap-3">
+                    className="hidden md:flex text-sm flex-row items-center gap-2 rounded-full px-3 py-1 hover:bg-slate-600 hover:text-white hover:gap-3">
                     All Projects <FontAwesomeIcon icon={faArrowRight} />
                 </Link>
             </div>
