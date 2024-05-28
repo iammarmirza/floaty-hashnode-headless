@@ -19,7 +19,8 @@
     "graphql": "^16.8.1",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-virtualized": "^9.22.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",

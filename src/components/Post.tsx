@@ -24,7 +24,7 @@ export const Post = (props: PostProps) => {
         return date
     }
     return (
-        <div className="w-full rounded-xl px-2 py-2 items-center flex flex-col sm:flex-row gap-4 border border-zinc-100 hover:shadow-md">
+        <div className="w-full rounded-xl px-2 py-2 items-center flex flex-col sm:flex-row gap-4 border border-zinc-100 hover:shadow-md mb-6">
             <div className="w-full sm:max-w-52 aspect-video rounded-lg overflow-hidden flex">
                 <Image src={postInfo?.coverImage?.url || ''} alt="Post Image" width={200} height={200} className="flex-1" />
             </div>
