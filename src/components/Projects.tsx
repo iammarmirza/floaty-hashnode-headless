@@ -2,6 +2,7 @@ import Link from "next/link"
 import { SingleProject } from "./SingleProject"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
+import { PROJECTS } from "@/utils/constants"
 
 export const Projects = () => {
     return (
@@ -15,8 +16,11 @@ export const Projects = () => {
                 </Link>
             </div>
             <div className="w-full gap-5 flex flex-col mx-auto sm:flex-row sm:justify-center md:gap-8">
-                <SingleProject />
-                <SingleProject />
+               {
+                PROJECTS.slice(0, 2).map(project => (
+                    <SingleProject project={project} key={project.name}/>
+                ))
+               }
             </div>
             <Link
                 href={'/project'}

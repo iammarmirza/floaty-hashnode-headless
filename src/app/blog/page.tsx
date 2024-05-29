@@ -3,9 +3,11 @@ import { ContactMe } from "@/components/ContactMe"
 import { Container } from "@/components/Container"
 import { useInfinitePostsQuery, usePostsQuery } from "../../../generated/graphq"
 import { Post } from "@/components/Post"
-import { InfiniteLoader, List, AutoSizer, WindowScroller } from "react-virtualized"
+import { useVirtualizer } from '@tanstack/react-virtual'
+import { useCallback, useEffect, useRef } from "react"
 
 const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST as string
+const height = window.innerHeight
 
 export default function Blog() {
     const {
@@ -32,66 +34,65 @@ export default function Blog() {
         });
 
     const posts = data?.pages.flatMap(page => page.publication?.postsViaPage.nodes) || []
-    const rowCount = posts.length + (hasNextPage ? 1 : 0);
+    const parentRef = useRef(null)
 
-    const loadingContent = <div>Loading...</div>;
+    // { Todo:- Fix Dynamic Height Issue }
+    const rowVirtualizer = useVirtualizer({
+        count: hasNextPage ? posts.length + 1 : posts.length,
+        getScrollElement: useCallback(() => parentRef.current, []),
+        estimateSize: useCallback(() => window.innerWidth < 540 ? 370 : 150, [height]),
+        overscan: 2,
+    })
 
-    const isRowLoaded = ({ index }: { index: number }) => {
-        return !!posts[index];
-    };
+    useEffect(() => {
+        const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse()
 
-    const rowRenderer = ({ index, key, style }: { index: number; key: any; style: any }) => {
-        let content;
-
-        if (!posts[index]) {
-            content = loadingContent;
-        } else {
-            content = <Post key={posts[index]?.id} postInfo={posts[index]} />
+        if (!lastItem) {
+            return
         }
 
-        return <>{content}</>
-    };
+        if (
+            lastItem.index >= posts.length - 1 &&
+            hasNextPage &&
+            !isFetchingNextPage
+        ) {
+            fetchNextPage()
+        }
+    }, [
+        hasNextPage,
+        fetchNextPage,
+        posts.length,
+        isFetchingNextPage,
+        rowVirtualizer.getVirtualItems(),
+    ])
 
     return (
         <Container>
             <div className="bg-white rounded-3xl px-5 py-6 flex-col flex gap-5 items-center">
                 <h1 className="text-3xl md:text-4xl font-semibold text-slate-800">Blogs</h1>
-                <div className="w-full flex flex-col">
-                    <WindowScroller>
-                        {({ height, isScrolling, onChildScroll, scrollTop }) => (
-                            <AutoSizer disableHeight>
-                                {({ width }) => (
-                                    <InfiniteLoader
-                                        isRowLoaded={isRowLoaded}
-                                        loadMoreRows={() =>
-                                            hasNextPage
-                                              ? fetchNextPage().then(
-                                                  () => {},
-                                                  (err) => console.error(err)
-                                                )
-                                              : Promise.resolve()}
-                                        rowCount={rowCount}
-                                    >
-                                        {({ onRowsRendered, registerChild }) => (
-                                            <List
-                                                autoHeight
-                                                width={width}
-                                                height={height}
-                                                scrollTop={scrollTop}
-                                                isScrolling={isScrolling}
-                                                onScroll={onChildScroll}
-                                                rowHeight={100}
-                                                rowCount={rowCount}
-                                                rowRenderer={rowRenderer}
-                                                onRowsRendered={onRowsRendered}
-                                                ref={registerChild}
-                                            />
-                                        )}
-                                    </InfiniteLoader>
-                                )}
-                            </AutoSizer>
-                        )}
-                    </WindowScroller>
+                <div
+                    ref={parentRef}
+                    className="w-full flex flex-col overflow-auto h-[500px] relative">
+                    {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                        const isLoaderRow = virtualRow.index > posts.length - 1
+                        const post = posts[virtualRow.index]
+
+                        return (
+                            <div
+                                key={virtualRow.index}
+                                data-index={virtualRow.index}
+                                className='w-full absolute'
+                                style={{
+                                    transform: `translateY(${virtualRow.start}px)`,
+                                    height: `${virtualRow.size}px`,
+                                }}
+                            >
+                                {isLoaderRow && hasNextPage && 'Loading...'}
+                                {isLoaderRow && !hasNextPage && 'You have reached the end'}
+                                <Post postInfo={post} />
+                            </div>
+                        )
+                    })}
                 </div>
             </div>
             <ContactMe />

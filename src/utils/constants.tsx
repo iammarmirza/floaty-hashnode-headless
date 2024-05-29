@@ -1,7 +1,7 @@
-import { PublicationLinks } from "@/gql/graphql"
+import { PublicationLinks } from "../../generated/graphq"
 import { faGithub, faHashnode, faInstagram, faLinkedin, faMastodon, faXTwitter, faYoutube, IconDefinition } from "@fortawesome/free-brands-svg-icons"
 import { faGlobe, faHammer, faHouse, faNewspaper, faUser } from "@fortawesome/free-solid-svg-icons"
-import { DocumentTextIcon, HomeIcon, PaintBrushIcon, UserIcon } from "@heroicons/react/24/outline"
+import { url } from "inspector"
 
 export const NAVLINKS = [
     {
@@ -38,3 +38,19 @@ export const SOCIAL_LINKS: {
     'linkedin': faLinkedin,
     'mastodon': faMastodon
 }
+
+export const PROJECTS = [
+    {
+        name: 'Khadim e Zyaraat',
+        url: 'github.com/iammarmirza/khadim-e-zyaraat',
+        demoLink: 'khadim-e-zyaraat-git-main-ammar-mirzas-projects-f4eca922.vercel.app',
+        imageUrl: '/khadim-e-zyaraat.png'
+    },
+    {
+        name: 'Anime Searchbar',
+        url: 'github.com/iammarmirza/redux-toolkit-jikan-api',
+        demoLink: 'redux-toolkit-jikan-api-git-main-ammar-mirzas-projects-f4eca922.vercel.app',
+        imageUrl: '/anime-searchbar.png'
+    }
+]
+
