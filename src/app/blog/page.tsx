@@ -3,11 +3,10 @@ import { ContactMe } from "@/components/ContactMe"
 import { Container } from "@/components/Container"
 import { useInfinitePostsQuery, usePostsQuery } from "../../../generated/graphq"
 import { Post } from "@/components/Post"
-import { useVirtualizer } from '@tanstack/react-virtual'
+import { measureElement, useVirtualizer, Virtualizer } from '@tanstack/react-virtual'
 import { useCallback, useEffect, useRef } from "react"
 
 const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST as string
-const height = window.innerHeight
 
 export default function Blog() {
     const {
@@ -36,12 +35,12 @@ export default function Blog() {
     const posts = data?.pages.flatMap(page => page.publication?.postsViaPage.nodes) || []
     const parentRef = useRef(null)
 
-    // { Todo:- Fix Dynamic Height Issue }
     const rowVirtualizer = useVirtualizer({
         count: hasNextPage ? posts.length + 1 : posts.length,
         getScrollElement: useCallback(() => parentRef.current, []),
-        estimateSize: useCallback(() => window.innerWidth < 540 ? 370 : 150, [height]),
+        estimateSize: useCallback(() => 150,[]),
         overscan: 2,
+        gap: 15
     })
 
     useEffect(() => {
@@ -72,27 +71,34 @@ export default function Blog() {
                 <h1 className="text-3xl md:text-4xl font-semibold text-slate-800">Blogs</h1>
                 <div
                     ref={parentRef}
-                    className="w-full flex flex-col overflow-auto h-[500px] relative">
-                    {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-                        const isLoaderRow = virtualRow.index > posts.length - 1
-                        const post = posts[virtualRow.index]
+                    className="w-full flex flex-col overflow-auto h-[500px]">
+                    <div
+                        className="relative w-full"
+                        style={{
+                            height: rowVirtualizer.getTotalSize()
+                        }}
+                    >
+                        {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                            const isLoaderRow = virtualRow.index > posts.length - 1
+                            const post = posts[virtualRow.index]
 
-                        return (
-                            <div
-                                key={virtualRow.index}
-                                data-index={virtualRow.index}
-                                className='w-full absolute'
-                                style={{
-                                    transform: `translateY(${virtualRow.start}px)`,
-                                    height: `${virtualRow.size}px`,
-                                }}
-                            >
-                                {isLoaderRow && hasNextPage && 'Loading...'}
-                                {isLoaderRow && !hasNextPage && 'You have reached the end'}
-                                <Post postInfo={post} />
-                            </div>
-                        )
-                    })}
+                            return (
+                                <div
+                                    key={virtualRow.index}
+                                    data-index={virtualRow.index}
+                                    className='w-full absolute'
+                                    ref={rowVirtualizer.measureElement}
+                                    style={{
+                                        transform: `translateY(${virtualRow.start}px)`,
+                                    }}
+                                >
+                                    <Post postInfo={post} />
+                                    {isLoaderRow && hasNextPage && 'Loading...'}
+                                    {isLoaderRow && !hasNextPage && 'You have reached the end'}
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
             </div>
             <ContactMe />

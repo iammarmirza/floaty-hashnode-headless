@@ -1,0 +1,24 @@
+query Post($host: String, $slug: String!) {
+  publication(host: $host) {
+    post(slug: $slug) {
+      id
+      slug
+      title
+      publishedAt
+      views
+      responseCount
+      hasLatexInPost
+      author {
+        name
+        username
+        profilePicture
+      }
+      coverImage {
+        url
+      }
+      content {
+        html
+      }
+    }
+  }
+}

@@ -4139,6 +4139,14 @@ export type WidgetPinSettings = {
   location: WidgetPinLocation;
 };
 
+export type PostQueryVariables = Exact<{
+  host?: InputMaybe<Scalars['String']['input']>;
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type PostQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', post?: { __typename?: 'Post', id: string, slug: string, title: string, publishedAt: any, views: number, responseCount: number, hasLatexInPost: boolean, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, content: { __typename?: 'Content', html: string } } | null } | null };
+
 export type PostsQueryVariables = Exact<{
   host?: InputMaybe<Scalars['String']['input']>;
   pageSize: Scalars['Int']['input'];
@@ -4156,6 +4164,77 @@ export type PublicationQueryVariables = Exact<{
 export type PublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, links?: { __typename?: 'PublicationLinks', instagram?: string | null, github?: string | null, website?: string | null, hashnode?: string | null, youtube?: string | null, linkedin?: string | null, mastodon?: string | null } | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, slug: string, title: string, brief: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }> }, author: { __typename?: 'User', name: string, profilePicture?: string | null, location?: string | null, bio?: { __typename?: 'Content', html: string } | null } } | null };
 
 
+
+export const PostDocument = `
+    query Post($host: String, $slug: String!) {
+  publication(host: $host) {
+    post(slug: $slug) {
+      id
+      slug
+      title
+      publishedAt
+      views
+      responseCount
+      hasLatexInPost
+      author {
+        name
+        username
+        profilePicture
+      }
+      coverImage {
+        url
+      }
+      content {
+        html
+      }
+    }
+  }
+}
+    `;
+
+export const usePostQuery = <
+      TData = PostQuery,
+      TError = unknown
+    >(
+      variables: PostQueryVariables,
+      options?: Omit<UseQueryOptions<PostQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<PostQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<PostQuery, TError, TData>(
+      {
+    queryKey: ['Post', variables],
+    queryFn: fetchData<PostQuery, PostQueryVariables>(PostDocument, variables),
+    ...options
+  }
+    )};
+
+usePostQuery.document = PostDocument;
+
+usePostQuery.getKey = (variables: PostQueryVariables) => ['Post', variables];
+
+export const useInfinitePostQuery = <
+      TData = InfiniteData<PostQuery>,
+      TError = unknown
+    >(
+      variables: PostQueryVariables,
+      options: Omit<UseInfiniteQueryOptions<PostQuery, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<PostQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useInfiniteQuery<PostQuery, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? ['Post.infinite', variables],
+      queryFn: (metaData) => fetchData<PostQuery, PostQueryVariables>(PostDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      ...restOptions
+    }
+  })()
+    )};
+
+useInfinitePostQuery.getKey = (variables: PostQueryVariables) => ['Post.infinite', variables];
+
+
+usePostQuery.fetcher = (variables: PostQueryVariables, options?: RequestInit['headers']) => fetchData<PostQuery, PostQueryVariables>(PostDocument, variables, options);
 
 export const PostsDocument = `
     query Posts($host: String, $pageSize: Int!, $page: Int!) {
