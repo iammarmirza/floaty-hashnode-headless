@@ -1,4 +1,4 @@
-import { PublicationLinks } from "../../generated/graphq"
+import { PublicationLinks } from "../../../generated/graphq"
 import { faGithub, faHashnode, faInstagram, faLinkedin, faMastodon, faXTwitter, faYoutube, IconDefinition } from "@fortawesome/free-brands-svg-icons"
 import { faGlobe, faHammer, faHouse, faNewspaper, faUser } from "@fortawesome/free-solid-svg-icons"
 import { url } from "inspector"

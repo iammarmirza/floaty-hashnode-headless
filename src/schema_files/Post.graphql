@@ -18,6 +18,7 @@ query Post($host: String, $slug: String!) {
       }
       content {
         html
+        markdown
       }
     }
   }

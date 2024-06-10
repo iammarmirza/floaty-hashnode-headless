@@ -1,7 +1,7 @@
 'use client'
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { SOCIAL_LINKS } from "@/utils/constants";
+import { SOCIAL_LINKS } from "@/utils/consts/constants";
 import { usePublicationQuery } from "../../generated/graphq";
 const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST as string
 

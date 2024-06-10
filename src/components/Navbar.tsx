@@ -1,7 +1,7 @@
 'use client'
 
 import Link from "next/link"
-import { NAVLINKS } from "@/utils/constants"
+import { NAVLINKS } from "@/utils/consts/constants"
 import { usePathname } from "next/navigation"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 

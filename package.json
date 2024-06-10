@@ -16,10 +16,15 @@
     "@fortawesome/react-fontawesome": "^0.2.1",
     "@tanstack/react-query": "^5.37.1",
     "@tanstack/react-virtual": "^3.5.0",
+    "@types/marked": "^6.0.0",
     "graphql": "^16.8.1",
+    "marked": "^12.0.2",
     "next": "14.2.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "sanitize-html": "^2.13.0",
+    "slug": "^9.1.0",
+    "validator": "^13.12.0"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^5.0.2",
