@@ -21,7 +21,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-slate-200`}>
+      <body className={`${inter.className} bg-slate-300`}>
         <ReactQueryProvider>
           {children}
           <Navbar />

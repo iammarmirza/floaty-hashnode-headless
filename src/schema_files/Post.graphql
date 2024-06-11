@@ -2,12 +2,22 @@ query Post($host: String, $slug: String!) {
   publication(host: $host) {
     post(slug: $slug) {
       id
+      url
       slug
       title
+      subtitle
+      brief
       publishedAt
       views
       responseCount
       hasLatexInPost
+      ogMetaData {
+        image
+      }
+      seo {
+        title
+        description
+      }
       author {
         name
         username
