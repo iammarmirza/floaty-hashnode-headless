@@ -3574,10 +3574,12 @@ export enum Scope {
   AssignProPublications = 'assign_pro_publications',
   ChangeProSubscription = 'change_pro_subscription',
   CreatePro = 'create_pro',
+  DeleteDraft = 'delete_draft',
   DocsEditorOrOwner = 'docs_editor_or_owner',
   DocsOwner = 'docs_owner',
   ImportSubscribersToPublication = 'import_subscribers_to_publication',
   InvitedTeamUser = 'invited_team_user',
+  MoveDraft = 'move_draft',
   PublicationAdmin = 'publication_admin',
   PublicationMember = 'publication_member',
   PublishComment = 'publish_comment',
@@ -3591,6 +3593,7 @@ export enum Scope {
   Signup = 'signup',
   TeamHashnode = 'team_hashnode',
   UpdateComment = 'update_comment',
+  UpdateDraft = 'update_draft',
   UpdatePost = 'update_post',
   UpdateReply = 'update_reply',
   WebhookAdmin = 'webhook_admin',
@@ -3756,7 +3759,7 @@ export type StaticPage = Node & {
   ogMetaData?: Maybe<OpenGraphMetaData>;
   /** Information about the static page's SEO metadata i.e. title and description. */
   seo?: Maybe<Seo>;
-  /** The slug of the static page. Used to access static page.  Example https://johndoe.com/my-page */
+  /** The slug of the static page. Used to access static page. Example `https://johndoe.com/my-page`. */
   slug: Scalars['String']['output'];
   /** The title of the static page. Shown in nav bar. */
   title: Scalars['String']['output'];
@@ -4539,7 +4542,7 @@ export type PublicationQueryVariables = Exact<{
 }>;
 
 
-export type PublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, links?: { __typename?: 'PublicationLinks', instagram?: string | null, github?: string | null, website?: string | null, hashnode?: string | null, youtube?: string | null, linkedin?: string | null, mastodon?: string | null } | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, slug: string, title: string, brief: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }> }, author: { __typename?: 'User', name: string, profilePicture?: string | null, location?: string | null, bio?: { __typename?: 'Content', html: string } | null } } | null };
+export type PublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, descriptionSEO?: string | null, displayTitle?: string | null, title: string, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, instagram?: string | null, github?: string | null, website?: string | null, hashnode?: string | null, youtube?: string | null, linkedin?: string | null, mastodon?: string | null } | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, slug: string, title: string, brief: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }> }, author: { __typename?: 'User', name: string, profilePicture?: string | null, location?: string | null, bio?: { __typename?: 'Content', html: string, text: string } | null } } | null };
 
 
 
@@ -4696,7 +4699,14 @@ export const PublicationDocument = `
     query Publication($host: String) {
   publication(host: $host) {
     id
+    descriptionSEO
+    displayTitle
+    title
+    ogMetaData {
+      image
+    }
     links {
+      twitter
       instagram
       github
       website
@@ -4722,6 +4732,7 @@ export const PublicationDocument = `
       name
       bio {
         html
+        text
       }
       profilePicture
       location

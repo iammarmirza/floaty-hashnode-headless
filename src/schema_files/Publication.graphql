@@ -1,7 +1,14 @@
 query Publication($host: String) {
   publication(host: $host) {
     id
+    descriptionSEO
+    displayTitle
+    title
+    ogMetaData {
+      image
+    }
     links {
+      twitter
       instagram
       github
       website
@@ -27,6 +34,7 @@ query Publication($host: String) {
       name
       bio {
         html
+        text
       }
       profilePicture
       location

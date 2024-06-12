@@ -2,7 +2,7 @@ import Link from "next/link"
 import { SingleProject } from "./SingleProject"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons"
-import { PROJECTS } from "@/utils/consts/constants"
+import { PROJECTS } from "@/utils/consts"
 
 export const Projects = () => {
     return (

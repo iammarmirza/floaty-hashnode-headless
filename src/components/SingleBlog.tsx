@@ -30,16 +30,14 @@ export const SingleBlog = (props: SingleBlogProps) => {
 
     return (
         <Link href={`/blog/${slug}`} className="w-full px-4 py-4 rounded-2xl border border-zinc-100 sm:max-w-72 hover:border-zinc-200 group md:max-w-80 lg:max-w-96 items-center">
-            <div className="relative flex flex-col gap-3 w-full">
+            <article className="relative flex flex-col gap-3 w-full">
                 {
-                    coverImageSrc && <CoverImage title={title} src={coverImageSrc} priority={true}/>
+                    coverImageSrc && <CoverImage title={title} src={coverImageSrc} priority={true} />
                 }
                 <h3 className="font-semibold text-xl">{title}</h3>
                 <p className="text-slate-500 text-justify mb-8  line-clamp-3 leading-snug text-sm">{brief}</p>
-                <button className="hidden absolute group-hover:block right-1 bottom-1">
-                    <FontAwesomeIcon icon={faArrowRight} size="lg" />
-                </button>
-            </div>
+                <FontAwesomeIcon icon={faArrowRight} size="lg" className="hidden absolute group-hover:block right-1 bottom-1" />
+            </article>
         </Link>
     )
 }
