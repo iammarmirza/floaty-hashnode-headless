@@ -1,30 +1,34 @@
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image';
+import Link from 'next/link';
 
 interface PostHeaderProps {
-    title: string,
-    name: string,
-    profileImage?: string | null | undefined,
-    subtitle?: string | null | undefined
+  title: string;
+  name: string;
+  profileImage?: string | null | undefined;
+  subtitle?: string | null | undefined;
 }
 
-export const PostHeader = ({ title, name, profileImage, subtitle }: PostHeaderProps) => {
-    return (
-        <div className="w-full text-slate-950 flex flex-col py-6 mx-4">
-            <h1 className="text-2xl md:text-4xl mb-4 font-bold w-full text-slate-950">{title}</h1>
-            {
-                subtitle && <p>{subtitle}</p>
-            }
-            <div className="flex w-full justify-between">
-                <div className="flex gap-2 items-center">
-                    {
-                        profileImage && <div className="overflow-hidden rounded-full flex h-8 w-8">
-                            <Image src={profileImage} width={200} height={200} alt="" />
-                        </div>
-                    }
-                    <Link href="/">{name}</Link>
-                </div>
+export const PostHeader = ({
+  title,
+  name,
+  profileImage,
+  subtitle,
+}: PostHeaderProps) => {
+  return (
+    <div className='mx-4 flex w-full flex-col py-6 text-slate-950 dark:text-zinc-300'>
+      <h1 className='mb-4 w-full text-2xl font-bold md:text-4xl dark:text-zinc-100'>
+        {title}
+      </h1>
+      <div className='flex w-full justify-between'>
+        <div className='flex items-center gap-2'>
+          {profileImage && (
+            <div className='flex h-8 w-8 overflow-hidden rounded-full'>
+              <Image src={profileImage} width={200} height={200} alt={name} />
             </div>
+          )}
+          <Link href='/'>{name}</Link>
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
