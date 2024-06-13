@@ -43,13 +43,13 @@ export const SingleBlog = (props: SingleBlogProps) => {
           <CoverImage title={title} src={coverImageSrc} priority={true} />
         )}
         <h3 className='text-xl font-semibold dark:text-zinc-100'>{title}</h3>
-        <p className='mb-8 line-clamp-3 text-justify text-sm leading-snug text-slate-500 dark:text-zinc-300'>
+        <p className='lg:mb-8 line-clamp-3 text-justify text-sm leading-snug text-slate-500 dark:text-zinc-300'>
           {brief}
         </p>
         <FontAwesomeIcon
           icon={faArrowRight}
           size='lg'
-          className='absolute bottom-1 right-1 hidden group-hover:block dark:text-zinc-300'
+          className='absolute bottom-1 right-1 hidden lg:group-hover:block dark:text-zinc-300'
         />
       </article>
     </Link>

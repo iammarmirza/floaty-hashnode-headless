@@ -1,15 +1,12 @@
 'use client';
 import Image from 'next/image';
 import { SocialLinks } from './SocialLinks';
-import { usePathname } from 'next/navigation';
-import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { usePublicationQuery } from '../../generated/graphq';
 const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST as string;
 
 export const AboutMe = () => {
-  const path = usePathname();
   const { data } = usePublicationQuery({
     host,
   });
@@ -45,7 +42,7 @@ export const AboutMe = () => {
           <p className='text-2xl font-semibold text-slate-950 sm:text-3xl dark:text-zinc-100'>{`Hi There! I am ${publication.author.name}!`}</p>
           {publication.author.bio && (
             <div
-              className='text-slate-500 dark:text-zinc-300'
+              className='text-slate-500 dark:text-zinc-300 text-justify lg:text-left'
               dangerouslySetInnerHTML={{
                 __html: publication.author.bio.html || '',
               }}

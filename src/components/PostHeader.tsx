@@ -16,7 +16,7 @@ export const PostHeader = ({
 }: PostHeaderProps) => {
   return (
     <div className='mx-4 flex w-full flex-col py-6 text-slate-950 dark:text-zinc-300'>
-      <h1 className='mb-4 w-full text-2xl font-bold md:text-4xl dark:text-zinc-100'>
+      <h1 className='mb-4 w-full text-2xl font-bold md:text-4xl dark:text-zinc-100 text-center'>
         {title}
       </h1>
       <div className='flex w-full justify-between'>

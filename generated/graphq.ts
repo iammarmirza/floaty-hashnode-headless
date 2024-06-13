@@ -1,41 +1,22 @@
-import {
-  useQuery,
-  useInfiniteQuery,
-  UseQueryOptions,
-  UseInfiniteQueryOptions,
-  InfiniteData,
-} from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, UseQueryOptions, UseInfiniteQueryOptions, InfiniteData } from '@tanstack/react-query';
 import { fetchData } from '../src/utils/reactQueryFetcher';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
-export type Exact<T extends { [key: string]: unknown }> = {
-  [K in keyof T]: T[K];
-};
-export type MakeOptional<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]?: Maybe<T[SubKey]>;
-};
-export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & {
-  [SubKey in K]: Maybe<T[SubKey]>;
-};
-export type MakeEmpty<
-  T extends { [key: string]: unknown },
-  K extends keyof T,
-> = { [_ in K]?: never };
-export type Incremental<T> =
-  | T
-  | {
-      [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never;
-    };
+export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
+export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
+export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
+export type MakeEmpty<T extends { [key: string]: unknown }, K extends keyof T> = { [_ in K]?: never };
+export type Incremental<T> = T | { [P in keyof T]?: P extends ' $fragmentName' | '__typename' ? T[P] : never };
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
-  ID: { input: string; output: string };
-  String: { input: string; output: string };
-  Boolean: { input: boolean; output: boolean };
-  Int: { input: number; output: number };
-  Float: { input: number; output: number };
-  DateTime: { input: any; output: any };
-  ObjectId: { input: any; output: any };
-  URL: { input: any; output: any };
+  ID: { input: string; output: string; }
+  String: { input: string; output: string; }
+  Boolean: { input: boolean; output: boolean; }
+  Int: { input: number; output: number; }
+  Float: { input: number; output: number; }
+  DateTime: { input: any; output: any; }
+  ObjectId: { input: any; output: any; }
+  URL: { input: any; output: any; }
 };
 
 export type AcceptInviteToPublicationInput = {
@@ -114,7 +95,7 @@ export enum AudioBlogVoiceType {
   /** Enum for the female voice type of the audio blog. */
   Female = 'FEMALE',
   /** Enum for the male voice type of the audio blog. */
-  Male = 'MALE',
+  Male = 'MALE'
 }
 
 /** Used when Audioblog feature is enabled. Contains URLs to the audioblog of the post. */
@@ -131,7 +112,7 @@ export enum BackupStatus {
   /** The backup failed. */
   Failed = 'failed',
   /** The backup was successful. */
-  Success = 'success',
+  Success = 'success'
 }
 
 /** A badge that the user has earned. */
@@ -244,6 +225,7 @@ export type Comment = Node & {
   /** Total number of reactions on the comment. Reactions are hearts added to any comment. */
   totalReactions: Scalars['Int']['output'];
 };
+
 
 /**
  * Contains basic information about the comment.
@@ -816,7 +798,7 @@ export enum CountryCodeAlpha2 {
   /** Zimbabwe */
   Zw = 'ZW',
   /** Unknown */
-  Zz = 'ZZ',
+  Zz = 'ZZ'
 }
 
 /** Contains information about cover image options of the post. Like URL of the cover image, attribution, etc. */
@@ -998,7 +980,7 @@ export type CustomCssFeature = Feature & {
 export enum CustomDomainStatus {
   Invalid = 'INVALID',
   Valid = 'VALID',
-  Verifying = 'VERIFYING',
+  Verifying = 'VERIFYING'
 }
 
 /** Contains the publication's dark mode preferences. */
@@ -1033,7 +1015,7 @@ export enum DeviceType {
   Desktop = 'DESKTOP',
   Laptop = 'LAPTOP',
   Mobile = 'MOBILE',
-  Tablet = 'TABLET',
+  Tablet = 'TABLET'
 }
 
 /** Contains the publication's domain information. */
@@ -1266,7 +1248,7 @@ export enum EmailImportStatus {
   /** The has been rejected. Nothing has been imported. */
   Rejected = 'REJECTED',
   /** Import was successful. New emails have been imported. */
-  Success = 'SUCCESS',
+  Success = 'SUCCESS'
 }
 
 /** Invitations that failed to be sent to the user */
@@ -1333,209 +1315,191 @@ export enum FeedType {
   /** Returns posts which were published recently, sorted based on recency. */
   Recent = 'RECENT',
   /** Returns posts based on old personalization algorithm. */
-  Relevant = 'RELEVANT',
+  Relevant = 'RELEVANT'
 }
 
 /** Views implementation that will be returned if grouping by browser. */
-export type GroupedByBrowserViews = Node &
-  Views & {
-    __typename?: 'GroupedByBrowserViews';
-    /** The browser that these views belong to. */
-    browser: Scalars['String']['output'];
-    id: Scalars['ID']['output'];
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByBrowserViews = Node & Views & {
+  __typename?: 'GroupedByBrowserViews';
+  /** The browser that these views belong to. */
+  browser: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if grouping by browser. */
-export type GroupedByBrowserVisitors = Node &
-  Visitors & {
-    __typename?: 'GroupedByBrowserVisitors';
-    /** The browser that these views belong to. */
-    browser: Scalars['String']['output'];
-    id: Scalars['ID']['output'];
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByBrowserVisitors = Node & Visitors & {
+  __typename?: 'GroupedByBrowserVisitors';
+  /** The browser that these views belong to. */
+  browser: Scalars['String']['output'];
+  id: Scalars['ID']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
 /** Views implementation that will be returned if grouping by country. */
-export type GroupedByCountryViews = Node &
-  Views & {
-    __typename?: 'GroupedByCountryViews';
-    /** The country that these views belong to. */
-    country: CountryCodeAlpha2;
-    id: Scalars['ID']['output'];
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByCountryViews = Node & Views & {
+  __typename?: 'GroupedByCountryViews';
+  /** The country that these views belong to. */
+  country: CountryCodeAlpha2;
+  id: Scalars['ID']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if grouping by country. */
-export type GroupedByCountryVisitors = Node &
-  Visitors & {
-    __typename?: 'GroupedByCountryVisitors';
-    /** The country that these views belong to. */
-    country: CountryCodeAlpha2;
-    id: Scalars['ID']['output'];
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByCountryVisitors = Node & Visitors & {
+  __typename?: 'GroupedByCountryVisitors';
+  /** The country that these views belong to. */
+  country: CountryCodeAlpha2;
+  id: Scalars['ID']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
 /** Views implementation that will be returned if grouping by device type. */
-export type GroupedByDeviceTypeViews = Node &
-  Views & {
-    __typename?: 'GroupedByDeviceTypeViews';
-    /** The type of device that these views belong to. */
-    deviceType: DeviceType;
-    id: Scalars['ID']['output'];
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByDeviceTypeViews = Node & Views & {
+  __typename?: 'GroupedByDeviceTypeViews';
+  /** The type of device that these views belong to. */
+  deviceType: DeviceType;
+  id: Scalars['ID']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if grouping by device type. */
-export type GroupedByDeviceTypeVisitors = Node &
-  Visitors & {
-    __typename?: 'GroupedByDeviceTypeVisitors';
-    /** The type of device that these views belong to. */
-    deviceType: DeviceType;
-    id: Scalars['ID']['output'];
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByDeviceTypeVisitors = Node & Visitors & {
+  __typename?: 'GroupedByDeviceTypeVisitors';
+  /** The type of device that these views belong to. */
+  deviceType: DeviceType;
+  id: Scalars['ID']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
 /** Views implementation that will be returned if grouping by operating system. */
-export type GroupedByOperatingSystemViews = Node &
-  Views & {
-    __typename?: 'GroupedByOperatingSystemViews';
-    id: Scalars['ID']['output'];
-    /** The operating system that these views belong to. */
-    operatingSystem: Scalars['String']['output'];
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByOperatingSystemViews = Node & Views & {
+  __typename?: 'GroupedByOperatingSystemViews';
+  id: Scalars['ID']['output'];
+  /** The operating system that these views belong to. */
+  operatingSystem: Scalars['String']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if grouping by operating system. */
-export type GroupedByOperatingSystemVisitors = Node &
-  Visitors & {
-    __typename?: 'GroupedByOperatingSystemVisitors';
-    id: Scalars['ID']['output'];
-    /** The operating system that these views belong to. */
-    operatingSystem: Scalars['String']['output'];
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByOperatingSystemVisitors = Node & Visitors & {
+  __typename?: 'GroupedByOperatingSystemVisitors';
+  id: Scalars['ID']['output'];
+  /** The operating system that these views belong to. */
+  operatingSystem: Scalars['String']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
 /** Views implementation that will be returned if grouping by page. */
-export type GroupedByPageViews = Node &
-  Views & {
-    __typename?: 'GroupedByPageViews';
-    id: Scalars['ID']['output'];
-    /** The page that these views belong to. */
-    page: StaticPage;
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByPageViews = Node & Views & {
+  __typename?: 'GroupedByPageViews';
+  id: Scalars['ID']['output'];
+  /** The page that these views belong to. */
+  page: StaticPage;
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if grouping by page. */
-export type GroupedByPageVisitors = Node &
-  Visitors & {
-    __typename?: 'GroupedByPageVisitors';
-    id: Scalars['ID']['output'];
-    /** The page that these views belong to. */
-    page: StaticPage;
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByPageVisitors = Node & Visitors & {
+  __typename?: 'GroupedByPageVisitors';
+  id: Scalars['ID']['output'];
+  /** The page that these views belong to. */
+  page: StaticPage;
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
 /** Views implementation that will be returned if grouping by path. */
-export type GroupedByPathViews = Node &
-  Views & {
-    __typename?: 'GroupedByPathViews';
-    id: Scalars['ID']['output'];
-    /** The path that these views belong to. */
-    path: Scalars['String']['output'];
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByPathViews = Node & Views & {
+  __typename?: 'GroupedByPathViews';
+  id: Scalars['ID']['output'];
+  /** The path that these views belong to. */
+  path: Scalars['String']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if grouping by path. */
-export type GroupedByPathVisitors = Node &
-  Visitors & {
-    __typename?: 'GroupedByPathVisitors';
-    id: Scalars['ID']['output'];
-    /** The path that these views belong to. */
-    path: Scalars['String']['output'];
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByPathVisitors = Node & Visitors & {
+  __typename?: 'GroupedByPathVisitors';
+  id: Scalars['ID']['output'];
+  /** The path that these views belong to. */
+  path: Scalars['String']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
 /** Views implementation that will be returned if grouping by post. */
-export type GroupedByPostViews = Node &
-  Views & {
-    __typename?: 'GroupedByPostViews';
-    id: Scalars['ID']['output'];
-    /** The post that these views belong to. */
-    post: Post;
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByPostViews = Node & Views & {
+  __typename?: 'GroupedByPostViews';
+  id: Scalars['ID']['output'];
+  /** The post that these views belong to. */
+  post: Post;
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if grouping by post. */
-export type GroupedByPostVisitors = Node &
-  Visitors & {
-    __typename?: 'GroupedByPostVisitors';
-    id: Scalars['ID']['output'];
-    /** The post that these views belong to. */
-    post: Post;
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByPostVisitors = Node & Visitors & {
+  __typename?: 'GroupedByPostVisitors';
+  id: Scalars['ID']['output'];
+  /** The post that these views belong to. */
+  post: Post;
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
 /** Views implementation that will be returned if grouping by `REFERRER_HOST` dimension. */
-export type GroupedByReferrerHostViews = Node &
-  Views & {
-    __typename?: 'GroupedByReferrerHostViews';
-    id: Scalars['ID']['output'];
-    /** The referrer host that these views belong to. */
-    referrerHost: Scalars['String']['output'];
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByReferrerHostViews = Node & Views & {
+  __typename?: 'GroupedByReferrerHostViews';
+  id: Scalars['ID']['output'];
+  /** The referrer host that these views belong to. */
+  referrerHost: Scalars['String']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if grouping by `REFERRER_HOST` dimension. */
-export type GroupedByReferrerHostVisitors = Node &
-  Visitors & {
-    __typename?: 'GroupedByReferrerHostVisitors';
-    id: Scalars['ID']['output'];
-    /** The referrer host that these views belong to. */
-    referrerHost: Scalars['String']['output'];
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByReferrerHostVisitors = Node & Visitors & {
+  __typename?: 'GroupedByReferrerHostVisitors';
+  id: Scalars['ID']['output'];
+  /** The referrer host that these views belong to. */
+  referrerHost: Scalars['String']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
-export type GroupedByTimeViews = Node &
-  Views & {
-    __typename?: 'GroupedByTimeViews';
-    /** The start of the time range that these views belong to. */
-    from: Scalars['DateTime']['output'];
-    id: Scalars['ID']['output'];
-    /** The end of the time range that these views belong to. */
-    to: Scalars['DateTime']['output'];
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByTimeViews = Node & Views & {
+  __typename?: 'GroupedByTimeViews';
+  /** The start of the time range that these views belong to. */
+  from: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  /** The end of the time range that these views belong to. */
+  to: Scalars['DateTime']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if a grouping by time is provided. */
-export type GroupedByTimeVisitors = Node &
-  Visitors & {
-    __typename?: 'GroupedByTimeVisitors';
-    /** The start of the time range that these visitors visited the page. */
-    from: Scalars['DateTime']['output'];
-    id: Scalars['ID']['output'];
-    /** The end of the time range that these visitors visited the page. */
-    to: Scalars['DateTime']['output'];
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type GroupedByTimeVisitors = Node & Visitors & {
+  __typename?: 'GroupedByTimeVisitors';
+  /** The start of the time range that these visitors visited the page. */
+  from: Scalars['DateTime']['output'];
+  id: Scalars['ID']['output'];
+  /** The end of the time range that these visitors visited the page. */
+  to: Scalars['DateTime']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
 export type HeadlessCmsFeature = Feature & {
   __typename?: 'HeadlessCMSFeature';
@@ -1547,7 +1511,7 @@ export enum HttpRedirectionType {
   /** A permanent redirect that corresponds to the 302 HTTP status code. */
   Permanent = 'PERMANENT',
   /** A temporary redirect that corresponds to the 301 HTTP status code. */
-  Temporary = 'TEMPORARY',
+  Temporary = 'TEMPORARY'
 }
 
 /**
@@ -1617,17 +1581,20 @@ export type IUser = {
   username: Scalars['String']['output'];
 };
 
+
 /** Basic information about a user on Hashnode. */
 export type IUserFollowersArgs = {
   page: Scalars['Int']['input'];
   pageSize: Scalars['Int']['input'];
 };
 
+
 /** Basic information about a user on Hashnode. */
 export type IUserFollowsArgs = {
   page: Scalars['Int']['input'];
   pageSize: Scalars['Int']['input'];
 };
+
 
 /** Basic information about a user on Hashnode. */
 export type IUserPostsArgs = {
@@ -1636,6 +1603,7 @@ export type IUserPostsArgs = {
   pageSize: Scalars['Int']['input'];
   sortBy?: InputMaybe<UserPostsSort>;
 };
+
 
 /** Basic information about a user on Hashnode. */
 export type IUserPublicationsArgs = {
@@ -1794,182 +1762,227 @@ export type Mutation = {
   updateWebhook: UpdateWebhookPayload;
 };
 
+
 export type MutationAcceptInviteToPublicationArgs = {
   input: AcceptInviteToPublicationInput;
 };
+
 
 export type MutationAcceptRoleBasedInviteArgs = {
   input: AcceptRoleBasedInviteInput;
 };
 
+
 export type MutationAddCommentArgs = {
   input: AddCommentInput;
 };
+
 
 export type MutationAddPostToSeriesArgs = {
   input: AddPostToSeriesInput;
 };
 
+
 export type MutationAddReplyArgs = {
   input: AddReplyInput;
 };
+
 
 export type MutationCancelScheduledDraftArgs = {
   input: CancelScheduledDraftInput;
 };
 
+
 export type MutationChangePublicationMemberRoleArgs = {
   input: ChangePublicationMemberRoleInput;
 };
+
 
 export type MutationChangePublicationMemberVisibilityArgs = {
   input: ChangePublicationMemberVisibilityInput;
 };
 
+
 export type MutationCreateDraftArgs = {
   input: CreateDraftInput;
 };
+
 
 export type MutationCreateRoleBasedInviteForPublicationArgs = {
   input: CreateRoleBasedInviteForPublicationInput;
 };
 
+
 export type MutationCreateSeriesArgs = {
   input: CreateSeriesInput;
 };
+
 
 export type MutationCreateWebhookArgs = {
   input: CreateWebhookInput;
 };
 
+
 export type MutationDeleteRoleBasedInviteArgs = {
   input: DeleteRoleBasedInviteInput;
 };
+
 
 export type MutationDeleteWebhookArgs = {
   id: Scalars['ID']['input'];
 };
 
+
 export type MutationInviteUsersToPublicationArgs = {
   input: InviteUsersToPublicationInput;
 };
+
 
 export type MutationLikeCommentArgs = {
   input: LikeCommentInput;
 };
 
+
 export type MutationLikePostArgs = {
   input: LikePostInput;
 };
+
 
 export type MutationLikeReplyArgs = {
   input: LikeReplyInput;
 };
 
+
 export type MutationPublishDraftArgs = {
   input: PublishDraftInput;
 };
+
 
 export type MutationPublishPostArgs = {
   input: PublishPostInput;
 };
 
+
 export type MutationRecommendPublicationsArgs = {
   input: RecommendPublicationsInput;
 };
+
 
 export type MutationReinviteUserToPublicationArgs = {
   input: ReinviteUserToPublicationInput;
 };
 
+
 export type MutationRemoveCommentArgs = {
   input: RemoveCommentInput;
 };
+
 
 export type MutationRemovePostArgs = {
   input: RemovePostInput;
 };
 
+
 export type MutationRemovePublicationMemberArgs = {
   input: RemovePublicationMemberInput;
 };
+
 
 export type MutationRemoveRecommendationArgs = {
   input: RemoveRecommendationInput;
 };
 
+
 export type MutationRemoveReplyArgs = {
   input: RemoveReplyInput;
 };
+
 
 export type MutationRemoveSeriesArgs = {
   input: RemoveSeriesInput;
 };
 
+
 export type MutationRescheduleDraftArgs = {
   input: RescheduleDraftInput;
 };
+
 
 export type MutationResendWebhookRequestArgs = {
   input: ResendWebhookRequestInput;
 };
 
+
 export type MutationRestorePostArgs = {
   input: RestorePostInput;
 };
+
 
 export type MutationRevokeUserInviteToPublicationArgs = {
   input: RevokeUserInviteToPublicationInput;
 };
 
+
 export type MutationScheduleDraftArgs = {
   input: ScheduleDraftInput;
 };
+
 
 export type MutationSubscribeToNewsletterArgs = {
   input: SubscribeToNewsletterInput;
 };
 
+
 export type MutationToggleAllowContributorEditsArgs = {
   input: ToggleAllowContributorEditsInput;
 };
+
 
 export type MutationToggleFollowUserArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
   username?: InputMaybe<Scalars['String']['input']>;
 };
 
+
 export type MutationToggleRoleBasedInviteLinksArgs = {
   publicationId: Scalars['ID']['input'];
 };
+
 
 export type MutationTriggerWebhookTestArgs = {
   input: TriggerWebhookTestInput;
 };
 
+
 export type MutationUnsubscribeFromNewsletterArgs = {
   input: UnsubscribeFromNewsletterInput;
 };
+
 
 export type MutationUpdateCommentArgs = {
   input: UpdateCommentInput;
 };
 
+
 export type MutationUpdatePostArgs = {
   input: UpdatePostInput;
 };
+
 
 export type MutationUpdateReplyArgs = {
   input: UpdateReplyInput;
 };
 
+
 export type MutationUpdateRoleBasedInviteArgs = {
   input: UpdateRoleBasedInviteInput;
 };
 
+
 export type MutationUpdateSeriesArgs = {
   input: UpdateSeriesInput;
 };
+
 
 export type MutationUpdateWebhookArgs = {
   input: UpdateWebhookInput;
@@ -1979,57 +1992,61 @@ export type MutationUpdateWebhookArgs = {
  * Basic information about the authenticated user.
  * User must be authenticated to use this type.
  */
-export type MyUser = IUser &
-  Node & {
-    __typename?: 'MyUser';
-    /**
-     * Whether or not the user is an ambassador.
-     * @deprecated Ambassadors program no longer active. Will be removed after 02/01/2024
-     */
-    ambassador: Scalars['Boolean']['output'];
-    /** The availability of the user based on tech stack and interests. Shown on the "I am available for" section in user's profile. */
-    availableFor?: Maybe<Scalars['String']['output']>;
-    /** Returns a list of badges that the user has earned. Shown on blogs /badges page. Example - https://iamshadmirza.com/badges */
-    badges: Array<Badge>;
-    /** A list of beta features that the user has access to. Only available to the authenticated user. */
-    betaFeatures: Array<BetaFeature>;
-    /** The bio of the user. Visible in about me section of the user's profile. */
-    bio?: Maybe<Content>;
-    /** The date the user joined Hashnode. */
-    dateJoined?: Maybe<Scalars['DateTime']['output']>;
-    /** Whether or not the user is deactivated. */
-    deactivated: Scalars['Boolean']['output'];
-    drafts: UserDraftConnection;
-    /** The users who are following this user */
-    followers: UserConnection;
-    /** The number of users that follow the requested user. Visible in the user's profile. */
-    followersCount: Scalars['Int']['output'];
-    /** The number of users that this user is following. Visible in the user's profile. */
-    followingsCount: Scalars['Int']['output'];
-    /** The users which this user is following */
-    follows: UserConnection;
-    /** The ID of the user. It can be used to identify the user. */
-    id: Scalars['ID']['output'];
-    /** The location of the user. */
-    location?: Maybe<Scalars['String']['output']>;
-    /** The name of the user. */
-    name: Scalars['String']['output'];
-    /** Returns the list of posts the user has published. */
-    posts: UserPostConnection;
-    /** The URL to the profile picture of the user. */
-    profilePicture?: Maybe<Scalars['String']['output']>;
-    provider?: Maybe<Scalars['String']['output']>;
-    /** Publications associated with the user. Includes personal and team publications. */
-    publications: UserPublicationsConnection;
-    /** The social media links of the user. Shown on the user's profile. */
-    socialMediaLinks?: Maybe<SocialMediaLinks>;
-    /** The tagline of the user. Shown on the user's profile below the name. */
-    tagline?: Maybe<Scalars['String']['output']>;
-    /** Returns a list of tags that the user follows. */
-    tagsFollowing: Array<Tag>;
-    /** The username of the user. It is unique and tied with user's profile URL. Example - https://hashnode.com/@username */
-    username: Scalars['String']['output'];
-  };
+export type MyUser = IUser & Node & {
+  __typename?: 'MyUser';
+  /**
+   * Whether or not the user is an ambassador.
+   * @deprecated Ambassadors program no longer active. Will be removed after 02/01/2024
+   */
+  ambassador: Scalars['Boolean']['output'];
+  /** The availability of the user based on tech stack and interests. Shown on the "I am available for" section in user's profile. */
+  availableFor?: Maybe<Scalars['String']['output']>;
+  /** Returns a list of badges that the user has earned. Shown on blogs /badges page. Example - https://iamshadmirza.com/badges */
+  badges: Array<Badge>;
+  /** A list of beta features that the user has access to. Only available to the authenticated user. */
+  betaFeatures: Array<BetaFeature>;
+  /** The bio of the user. Visible in about me section of the user's profile. */
+  bio?: Maybe<Content>;
+  /** The date the user joined Hashnode. */
+  dateJoined?: Maybe<Scalars['DateTime']['output']>;
+  /** Whether or not the user is deactivated. */
+  deactivated: Scalars['Boolean']['output'];
+  drafts: UserDraftConnection;
+  /** Email address of the user. Only available to the authenticated user. */
+  email: Scalars['String']['output'];
+  /** The users who are following this user */
+  followers: UserConnection;
+  /** The number of users that follow the requested user. Visible in the user's profile. */
+  followersCount: Scalars['Int']['output'];
+  /** The number of users that this user is following. Visible in the user's profile. */
+  followingsCount: Scalars['Int']['output'];
+  /** The users which this user is following */
+  follows: UserConnection;
+  /** The ID of the user. It can be used to identify the user. */
+  id: Scalars['ID']['output'];
+  /** The location of the user. */
+  location?: Maybe<Scalars['String']['output']>;
+  /** The name of the user. */
+  name: Scalars['String']['output'];
+  /** Returns the list of posts the user has published. */
+  posts: UserPostConnection;
+  /** The URL to the profile picture of the user. */
+  profilePicture?: Maybe<Scalars['String']['output']>;
+  provider?: Maybe<Scalars['String']['output']>;
+  /** Publications associated with the user. Includes personal and team publications. */
+  publications: UserPublicationsConnection;
+  /** Returns the user's role if any. */
+  role: UserRole;
+  /** The social media links of the user. Shown on the user's profile. */
+  socialMediaLinks?: Maybe<SocialMediaLinks>;
+  /** The tagline of the user. Shown on the user's profile below the name. */
+  tagline?: Maybe<Scalars['String']['output']>;
+  /** Returns a list of tags that the user follows. */
+  tagsFollowing: Array<Tag>;
+  /** The username of the user. It is unique and tied with user's profile URL. Example - https://hashnode.com/@username */
+  username: Scalars['String']['output'];
+};
+
 
 /**
  * Basic information about the authenticated user.
@@ -2040,6 +2057,7 @@ export type MyUserDraftsArgs = {
   first: Scalars['Int']['input'];
 };
 
+
 /**
  * Basic information about the authenticated user.
  * User must be authenticated to use this type.
@@ -2049,6 +2067,7 @@ export type MyUserFollowersArgs = {
   pageSize: Scalars['Int']['input'];
 };
 
+
 /**
  * Basic information about the authenticated user.
  * User must be authenticated to use this type.
@@ -2057,6 +2076,7 @@ export type MyUserFollowsArgs = {
   page: Scalars['Int']['input'];
   pageSize: Scalars['Int']['input'];
 };
+
 
 /**
  * Basic information about the authenticated user.
@@ -2068,6 +2088,7 @@ export type MyUserPostsArgs = {
   pageSize: Scalars['Int']['input'];
   sortBy?: InputMaybe<UserPostsSort>;
 };
+
 
 /**
  * Basic information about the authenticated user.
@@ -2093,7 +2114,7 @@ export type NewsletterFeature = Feature & {
 
 export enum NewsletterFrequency {
   Asap = 'asap',
-  Weekly = 'weekly',
+  Weekly = 'weekly'
 }
 
 export type NewsletterRecord = Node & {
@@ -2114,7 +2135,7 @@ export type NewsletterRecord = Node & {
 
 export enum NewsletterSubscribeStatus {
   Confirmed = 'CONFIRMED',
-  Pending = 'PENDING',
+  Pending = 'PENDING'
 }
 
 export type NewsletterSubscriber = Node & {
@@ -2133,7 +2154,7 @@ export type NewsletterSubscriber = Node & {
 };
 
 export enum NewsletterUnsubscribeStatus {
-  Unsubscribed = 'UNSUBSCRIBED',
+  Unsubscribed = 'UNSUBSCRIBED'
 }
 
 /** Node is a common interface for all types example User, Post, Comment, etc. */
@@ -2230,28 +2251,27 @@ export type PendingInviteConnection = PageConnection & {
 };
 
 /** Contains basic information about the tag returned by popularTags query. */
-export type PopularTag = ITag &
-  Node & {
-    __typename?: 'PopularTag';
-    /** Total number of users following this tag. */
-    followersCount: Scalars['Int']['output'];
-    /** The ID of the tag. */
-    id: Scalars['ID']['output'];
-    /** Information about the tag. Contains markdown html and text version of the tag's info. */
-    info?: Maybe<Content>;
-    /** The logo of the tag. Shown in tag page. */
-    logo?: Maybe<Scalars['String']['output']>;
-    /** The name of the tag. Shown in tag page. */
-    name: Scalars['String']['output'];
-    /** Alltime usage count of this tag in posts. */
-    postsCount: Scalars['Int']['output'];
-    /** The number of posts published in the given period that use this tag. */
-    postsCountInPeriod: Scalars['Int']['output'];
-    /** The slug of the tag. Used to access tags feed.  Example https://hashnode.com/n/graphql */
-    slug: Scalars['String']['output'];
-    /** The tagline of the tag. */
-    tagline?: Maybe<Scalars['String']['output']>;
-  };
+export type PopularTag = ITag & Node & {
+  __typename?: 'PopularTag';
+  /** Total number of users following this tag. */
+  followersCount: Scalars['Int']['output'];
+  /** The ID of the tag. */
+  id: Scalars['ID']['output'];
+  /** Information about the tag. Contains markdown html and text version of the tag's info. */
+  info?: Maybe<Content>;
+  /** The logo of the tag. Shown in tag page. */
+  logo?: Maybe<Scalars['String']['output']>;
+  /** The name of the tag. Shown in tag page. */
+  name: Scalars['String']['output'];
+  /** Alltime usage count of this tag in posts. */
+  postsCount: Scalars['Int']['output'];
+  /** The number of posts published in the given period that use this tag. */
+  postsCountInPeriod: Scalars['Int']['output'];
+  /** The slug of the tag. Used to access tags feed.  Example https://hashnode.com/n/graphql */
+  slug: Scalars['String']['output'];
+  /** The tagline of the tag. */
+  tagline?: Maybe<Scalars['String']['output']>;
+};
 
 /** Contains a tag and a cursor for pagination. */
 export type PopularTagEdge = Edge & {
@@ -2364,6 +2384,7 @@ export type Post = Node & {
   views: Scalars['Int']['output'];
 };
 
+
 /**
  * Contains basic information about the post.
  * A post is a published article on Hashnode.
@@ -2374,6 +2395,7 @@ export type PostCommentersArgs = {
   sortBy?: InputMaybe<PostCommenterSortBy>;
 };
 
+
 /**
  * Contains basic information about the post.
  * A post is a published article on Hashnode.
@@ -2383,6 +2405,7 @@ export type PostCommentsArgs = {
   first: Scalars['Int']['input'];
   sortBy?: InputMaybe<PostCommentSortBy>;
 };
+
 
 /**
  * Contains basic information about the post.
@@ -2399,7 +2422,7 @@ export enum PostAuthorType {
   /** The user has authored the post. */
   Author = 'AUTHOR',
   /** The user is a co-author of post. */
-  CoAuthor = 'CO_AUTHOR',
+  CoAuthor = 'CO_AUTHOR'
 }
 
 export type PostBadge = Node & {
@@ -2412,7 +2435,7 @@ export type PostBadge = Node & {
 
 export enum PostBadgeType {
   FeaturedDailyDotDev = 'FEATURED_DAILY_DOT_DEV',
-  FeaturedHashnode = 'FEATURED_HASHNODE',
+  FeaturedHashnode = 'FEATURED_HASHNODE'
 }
 
 export type PostBadgesFeature = Feature & {
@@ -2452,7 +2475,7 @@ export enum PostCommentSortBy {
   /** Sorts comments by recency. */
   Recent = 'RECENT',
   /** Sorts comments by popularity. */
-  Top = 'TOP',
+  Top = 'TOP'
 }
 
 /**
@@ -2485,7 +2508,7 @@ export enum PostCommenterSortBy {
   /** Sorts commenters by popularity. */
   Popular = 'POPULAR',
   /** Sorts commenters by recency. */
-  Recent = 'RECENT',
+  Recent = 'RECENT'
 }
 
 /** Contains information about the cover image of the post. */
@@ -2689,6 +2712,7 @@ export type Publication = Node & {
   urlPattern: UrlPattern;
 };
 
+
 /**
  * Contains basic information about the publication.
  * A publication is a blog that can be created for a user or a team.
@@ -2699,6 +2723,7 @@ export type PublicationDraftsArgs = {
   first: Scalars['Int']['input'];
 };
 
+
 /**
  * Contains basic information about the publication.
  * A publication is a blog that can be created for a user or a team.
@@ -2706,6 +2731,7 @@ export type PublicationDraftsArgs = {
 export type PublicationPostArgs = {
   slug: Scalars['String']['input'];
 };
+
 
 /**
  * Contains basic information about the publication.
@@ -2717,6 +2743,7 @@ export type PublicationPostsArgs = {
   first: Scalars['Int']['input'];
 };
 
+
 /**
  * Contains basic information about the publication.
  * A publication is a blog that can be created for a user or a team.
@@ -2727,6 +2754,7 @@ export type PublicationPostsViaPageArgs = {
   pageSize: Scalars['Int']['input'];
 };
 
+
 /**
  * Contains basic information about the publication.
  * A publication is a blog that can be created for a user or a team.
@@ -2735,6 +2763,7 @@ export type PublicationRecommendingPublicationsArgs = {
   page: Scalars['Int']['input'];
   pageSize: Scalars['Int']['input'];
 };
+
 
 /**
  * Contains basic information about the publication.
@@ -2746,6 +2775,7 @@ export type PublicationScheduledDraftsArgs = {
   first: Scalars['Int']['input'];
 };
 
+
 /**
  * Contains basic information about the publication.
  * A publication is a blog that can be created for a user or a team.
@@ -2753,6 +2783,7 @@ export type PublicationScheduledDraftsArgs = {
 export type PublicationSeriesArgs = {
   slug: Scalars['String']['input'];
 };
+
 
 /**
  * Contains basic information about the publication.
@@ -2763,6 +2794,7 @@ export type PublicationSeriesListArgs = {
   first: Scalars['Int']['input'];
 };
 
+
 /**
  * Contains basic information about the publication.
  * A publication is a blog that can be created for a user or a team.
@@ -2770,6 +2802,7 @@ export type PublicationSeriesListArgs = {
 export type PublicationStaticPageArgs = {
   slug: Scalars['String']['input'];
 };
+
 
 /**
  * Contains basic information about the publication.
@@ -2779,6 +2812,7 @@ export type PublicationStaticPagesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   first: Scalars['Int']['input'];
 };
+
 
 /**
  * Contains basic information about the publication.
@@ -2870,11 +2904,13 @@ export type PublicationInvite = {
   roleBasedInvites: RoleBasedInviteConnection;
 };
 
+
 /** Contains the publication invite information. */
 export type PublicationInvitePendingInvitesArgs = {
   page: Scalars['Int']['input'];
   pageSize: Scalars['Int']['input'];
 };
+
 
 /** Contains the publication invite information. */
 export type PublicationInviteRoleBasedInvitesArgs = {
@@ -2892,7 +2928,7 @@ export enum PublicationLayout {
    */
   Magazine = 'magazine',
   /** Changes the layout of blog into stacked list of posts. */
-  Stacked = 'stacked',
+  Stacked = 'stacked'
 }
 
 /** Contains the publication's social media links. */
@@ -2939,7 +2975,7 @@ export enum PublicationMemberPrivacyState {
   /** The member is private and not visible on the members page. */
   Private = 'PRIVATE',
   /** The member is public and visible on the members page. */
-  Public = 'PUBLIC',
+  Public = 'PUBLIC'
 }
 
 /** Contains the publication's navbar items. */
@@ -2971,7 +3007,7 @@ export enum PublicationNavigationType {
   /** The navbar item is a static page. */
   Page = 'page',
   /** The navbar item is a series. */
-  Series = 'series',
+  Series = 'series'
 }
 
 /**
@@ -3054,18 +3090,17 @@ export type PublicationSponsorship = {
   stripe?: Maybe<StripeConfiguration>;
 };
 
-export type PublicationUserRecommendingPublicationConnection =
-  PageConnection & {
-    __typename?: 'PublicationUserRecommendingPublicationConnection';
-    /** A list of edges containing Post information */
-    edges: Array<UserRecommendingPublicationEdge>;
-    /** Publications recommending this publication. */
-    nodes: Array<Publication>;
-    /** Information for page based pagination in Post connection. */
-    pageInfo: OffsetPageInfo;
-    /** The total number of documents in the connection. */
-    totalDocuments: Scalars['Int']['output'];
-  };
+export type PublicationUserRecommendingPublicationConnection = PageConnection & {
+  __typename?: 'PublicationUserRecommendingPublicationConnection';
+  /** A list of edges containing Post information */
+  edges: Array<UserRecommendingPublicationEdge>;
+  /** Publications recommending this publication. */
+  nodes: Array<Publication>;
+  /** Information for page based pagination in Post connection. */
+  pageInfo: OffsetPageInfo;
+  /** The total number of documents in the connection. */
+  totalDocuments: Scalars['Int']['output'];
+};
 
 export type PublicationViewEdge = Edge & {
   __typename?: 'PublicationViewEdge';
@@ -3203,9 +3238,11 @@ export type Query = {
   user?: Maybe<User>;
 };
 
+
 export type QueryDraftArgs = {
   id: Scalars['ObjectId']['input'];
 };
+
 
 export type QueryFeedArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -3213,18 +3250,22 @@ export type QueryFeedArgs = {
   first: Scalars['Int']['input'];
 };
 
+
 export type QueryPostArgs = {
   id: Scalars['ID']['input'];
 };
+
 
 export type QueryPublicationArgs = {
   host?: InputMaybe<Scalars['String']['input']>;
   id?: InputMaybe<Scalars['ObjectId']['input']>;
 };
 
+
 export type QueryScheduledPostArgs = {
   id?: InputMaybe<Scalars['ObjectId']['input']>;
 };
+
 
 export type QuerySearchPostsOfPublicationArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -3232,14 +3273,17 @@ export type QuerySearchPostsOfPublicationArgs = {
   first: Scalars['Int']['input'];
 };
 
+
 export type QueryTagArgs = {
   slug: Scalars['String']['input'];
 };
+
 
 export type QueryTopCommentersArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   first: Scalars['Int']['input'];
 };
+
 
 export type QueryUserArgs = {
   username: Scalars['String']['input'];
@@ -3562,7 +3606,7 @@ export enum Scope {
   WritePost = 'write_post',
   WriteSeries = 'write_series',
   WriteStaticPage = 'write_static_page',
-  WriteWidget = 'write_widget',
+  WriteWidget = 'write_widget'
 }
 
 /**
@@ -3626,6 +3670,7 @@ export type Series = Node & {
   /** The sort order of the series, determines if the latest posts should appear first or last in series. */
   sortOrder: SortOrder;
 };
+
 
 /**
  * Contains basic information about the series.
@@ -3699,7 +3744,7 @@ export type SocialMediaLinks = {
 /** SortOrder is a common enum for all types that can be sorted. */
 export enum SortOrder {
   Asc = 'asc',
-  Dsc = 'dsc',
+  Dsc = 'dsc'
 }
 
 /**
@@ -3792,28 +3837,28 @@ export type TableOfContentsItem = Node & {
   title: Scalars['String']['output'];
 };
 
-export type Tag = ITag &
-  Node & {
-    __typename?: 'Tag';
-    /** Total number of users following this tag. */
-    followersCount: Scalars['Int']['output'];
-    /** The ID of the tag. */
-    id: Scalars['ID']['output'];
-    /** Information about the tag. Contains markdown html and text version of the tag's info. */
-    info?: Maybe<Content>;
-    /** The logo of the tag. Shown in tag page. */
-    logo?: Maybe<Scalars['String']['output']>;
-    /** The name of the tag. Shown in tag page. */
-    name: Scalars['String']['output'];
-    /** Paginated list of posts published under this tag */
-    posts: FeedPostConnection;
-    /** Alltime usage count of this tag in posts. */
-    postsCount: Scalars['Int']['output'];
-    /** The slug of the tag. Used to access tags feed.  Example https://hashnode.com/n/graphql */
-    slug: Scalars['String']['output'];
-    /** The tagline of the tag. */
-    tagline?: Maybe<Scalars['String']['output']>;
-  };
+export type Tag = ITag & Node & {
+  __typename?: 'Tag';
+  /** Total number of users following this tag. */
+  followersCount: Scalars['Int']['output'];
+  /** The ID of the tag. */
+  id: Scalars['ID']['output'];
+  /** Information about the tag. Contains markdown html and text version of the tag's info. */
+  info?: Maybe<Content>;
+  /** The logo of the tag. Shown in tag page. */
+  logo?: Maybe<Scalars['String']['output']>;
+  /** The name of the tag. Shown in tag page. */
+  name: Scalars['String']['output'];
+  /** Paginated list of posts published under this tag */
+  posts: FeedPostConnection;
+  /** Alltime usage count of this tag in posts. */
+  postsCount: Scalars['Int']['output'];
+  /** The slug of the tag. Used to access tags feed.  Example https://hashnode.com/n/graphql */
+  slug: Scalars['String']['output'];
+  /** The tagline of the tag. */
+  tagline?: Maybe<Scalars['String']['output']>;
+};
+
 
 export type TagPostsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
@@ -3842,7 +3887,7 @@ export enum TagPostsSort {
   /** Determinate how to sort the results. Defaults to recents, used in New tag feed. */
   Recent = 'recent',
   /** Trending is particular used to fetch top posts trending within a week time under a tag */
-  Trending = 'trending',
+  Trending = 'trending'
 }
 
 /**
@@ -3889,22 +3934,20 @@ export type TriggerWebhookTestPayload = {
 };
 
 /** Views implementation that will be returned if no grouping is applied. */
-export type UngroupedViews = Node &
-  Views & {
-    __typename?: 'UngroupedViews';
-    id: Scalars['ID']['output'];
-    /** The aggregated views. */
-    total: Scalars['Int']['output'];
-  };
+export type UngroupedViews = Node & Views & {
+  __typename?: 'UngroupedViews';
+  id: Scalars['ID']['output'];
+  /** The aggregated views. */
+  total: Scalars['Int']['output'];
+};
 
 /** Visitors implementation that will be returned if no grouping is applied. */
-export type UngroupedVisitors = Node &
-  Visitors & {
-    __typename?: 'UngroupedVisitors';
-    id: Scalars['ID']['output'];
-    /** The aggregated number of visitors. */
-    total: Scalars['Int']['output'];
-  };
+export type UngroupedVisitors = Node & Visitors & {
+  __typename?: 'UngroupedVisitors';
+  id: Scalars['ID']['output'];
+  /** The aggregated number of visitors. */
+  total: Scalars['Int']['output'];
+};
 
 export type UnsubscribeFromNewsletterInput = {
   /** The email that is currently subscribed. */
@@ -4056,74 +4099,74 @@ export enum UrlPattern {
   /** Post URLs contain the slug (for example `my slug`) and a random id (like `1234`) , e.g. "/my-slug-1234". */
   Default = 'DEFAULT',
   /** Post URLs only contain the slug, e.g. "/my-slug". */
-  Simple = 'SIMPLE',
+  Simple = 'SIMPLE'
 }
 
 /** Basic information about a user on Hashnode. */
-export type User = IUser &
-  Node & {
-    __typename?: 'User';
-    /**
-     * Whether or not the user is an ambassador.
-     * @deprecated Ambassadors program no longer active. Will be removed after 02/01/2024
-     */
-    ambassador: Scalars['Boolean']['output'];
-    /** The availability of the user based on tech stack and interests. Shown on the "I am available for" section in user's profile. */
-    availableFor?: Maybe<Scalars['String']['output']>;
-    /** Returns a list of badges that the user has earned. Shown on blogs /badges page. Example - https://iamshadmirza.com/badges */
-    badges: Array<Badge>;
-    /** The bio of the user. Visible in about me section of the user's profile. */
-    bio?: Maybe<Content>;
-    /**
-     * The bio of the user. Visible in about me section of the user's profile.
-     * @deprecated Will be removed on 26/10/2023. Use bio instead of bioV2
-     */
-    bioV2?: Maybe<Content>;
-    /** The date the user joined Hashnode. */
-    dateJoined?: Maybe<Scalars['DateTime']['output']>;
-    /** Whether or not the user is deactivated. */
-    deactivated: Scalars['Boolean']['output'];
-    /** The users who are following this user */
-    followers: UserConnection;
-    /** The number of users that follow the requested user. Visible in the user's profile. */
-    followersCount: Scalars['Int']['output'];
-    /**
-     * Whether or not the authenticated user follows this user.
-     * Returns false if the authenticated user this user.
-     */
-    following: Scalars['Boolean']['output'];
-    /** The number of users that this user is following. Visible in the user's profile. */
-    followingsCount: Scalars['Int']['output'];
-    /** The users which this user is following */
-    follows: UserConnection;
-    /**
-     * Whether or not this user follows the authenticated user.
-     * Returns false if the authenticated user this user.
-     */
-    followsBack: Scalars['Boolean']['output'];
-    /** The ID of the user. It can be used to identify the user. */
-    id: Scalars['ID']['output'];
-    /** Whether or not this is a pro user. */
-    isPro: Scalars['Boolean']['output'];
-    /** The location of the user. */
-    location?: Maybe<Scalars['String']['output']>;
-    /** The name of the user. */
-    name: Scalars['String']['output'];
-    /** Returns the list of posts the user has published. */
-    posts: UserPostConnection;
-    /** The URL to the profile picture of the user. */
-    profilePicture?: Maybe<Scalars['String']['output']>;
-    /** Publications associated with the user. Includes personal and team publications. */
-    publications: UserPublicationsConnection;
-    /** The social media links of the user. Shown on the user's profile. */
-    socialMediaLinks?: Maybe<SocialMediaLinks>;
-    /** The tagline of the user. Shown on the user's profile below the name. */
-    tagline?: Maybe<Scalars['String']['output']>;
-    /** Returns a list of tags that the user follows. */
-    tagsFollowing: Array<Tag>;
-    /** The username of the user. It is unique and tied with user's profile URL. Example - https://hashnode.com/@username */
-    username: Scalars['String']['output'];
-  };
+export type User = IUser & Node & {
+  __typename?: 'User';
+  /**
+   * Whether or not the user is an ambassador.
+   * @deprecated Ambassadors program no longer active. Will be removed after 02/01/2024
+   */
+  ambassador: Scalars['Boolean']['output'];
+  /** The availability of the user based on tech stack and interests. Shown on the "I am available for" section in user's profile. */
+  availableFor?: Maybe<Scalars['String']['output']>;
+  /** Returns a list of badges that the user has earned. Shown on blogs /badges page. Example - https://iamshadmirza.com/badges */
+  badges: Array<Badge>;
+  /** The bio of the user. Visible in about me section of the user's profile. */
+  bio?: Maybe<Content>;
+  /**
+   * The bio of the user. Visible in about me section of the user's profile.
+   * @deprecated Will be removed on 26/10/2023. Use bio instead of bioV2
+   */
+  bioV2?: Maybe<Content>;
+  /** The date the user joined Hashnode. */
+  dateJoined?: Maybe<Scalars['DateTime']['output']>;
+  /** Whether or not the user is deactivated. */
+  deactivated: Scalars['Boolean']['output'];
+  /** The users who are following this user */
+  followers: UserConnection;
+  /** The number of users that follow the requested user. Visible in the user's profile. */
+  followersCount: Scalars['Int']['output'];
+  /**
+   * Whether or not the authenticated user follows this user.
+   * Returns false if the authenticated user this user.
+   */
+  following: Scalars['Boolean']['output'];
+  /** The number of users that this user is following. Visible in the user's profile. */
+  followingsCount: Scalars['Int']['output'];
+  /** The users which this user is following */
+  follows: UserConnection;
+  /**
+   * Whether or not this user follows the authenticated user.
+   * Returns false if the authenticated user this user.
+   */
+  followsBack: Scalars['Boolean']['output'];
+  /** The ID of the user. It can be used to identify the user. */
+  id: Scalars['ID']['output'];
+  /** Whether or not this is a pro user. */
+  isPro: Scalars['Boolean']['output'];
+  /** The location of the user. */
+  location?: Maybe<Scalars['String']['output']>;
+  /** The name of the user. */
+  name: Scalars['String']['output'];
+  /** Returns the list of posts the user has published. */
+  posts: UserPostConnection;
+  /** The URL to the profile picture of the user. */
+  profilePicture?: Maybe<Scalars['String']['output']>;
+  /** Publications associated with the user. Includes personal and team publications. */
+  publications: UserPublicationsConnection;
+  /** The social media links of the user. Shown on the user's profile. */
+  socialMediaLinks?: Maybe<SocialMediaLinks>;
+  /** The tagline of the user. Shown on the user's profile below the name. */
+  tagline?: Maybe<Scalars['String']['output']>;
+  /** Returns a list of tags that the user follows. */
+  tagsFollowing: Array<Tag>;
+  /** The username of the user. It is unique and tied with user's profile URL. Example - https://hashnode.com/@username */
+  username: Scalars['String']['output'];
+};
+
 
 /** Basic information about a user on Hashnode. */
 export type UserFollowersArgs = {
@@ -4131,11 +4174,13 @@ export type UserFollowersArgs = {
   pageSize: Scalars['Int']['input'];
 };
 
+
 /** Basic information about a user on Hashnode. */
 export type UserFollowsArgs = {
   page: Scalars['Int']['input'];
   pageSize: Scalars['Int']['input'];
 };
+
 
 /** Basic information about a user on Hashnode. */
 export type UserPostsArgs = {
@@ -4144,6 +4189,7 @@ export type UserPostsArgs = {
   pageSize: Scalars['Int']['input'];
   sortBy?: InputMaybe<UserPostsSort>;
 };
+
 
 /** Basic information about a user on Hashnode. */
 export type UserPublicationsArgs = {
@@ -4257,7 +4303,7 @@ export enum UserPostsAuthorTypeFilter {
   /** Only posts that are authored by the user. */
   AuthorOnly = 'AUTHOR_ONLY',
   /** Only posts that are co-authored by the user. */
-  CoAuthorOnly = 'CO_AUTHOR_ONLY',
+  CoAuthorOnly = 'CO_AUTHOR_ONLY'
 }
 
 /** Sorting for the posts of a user. */
@@ -4265,7 +4311,7 @@ export enum UserPostsSort {
   /** Oldest posts first. */
   DatePublishedAsc = 'DATE_PUBLISHED_ASC',
   /** Newest posts first. */
-  DatePublishedDesc = 'DATE_PUBLISHED_DESC',
+  DatePublishedDesc = 'DATE_PUBLISHED_DESC'
 }
 
 /** The invited role of the user in the publication. */
@@ -4276,7 +4322,7 @@ export enum UserPublicationInviteRole {
    * The editor has access to the publication dashboard to customize the blog and approve/reject posts.
    * They also have access to the member panel to add/modify/remove members. Editors cannot remove other editors or update their roles.
    */
-  Editor = 'EDITOR',
+  Editor = 'EDITOR'
 }
 
 /** The role of the user in the publication. */
@@ -4289,7 +4335,7 @@ export enum UserPublicationRole {
    */
   Editor = 'EDITOR',
   /** The owner is the creator of the publication and can do all things, including delete publication. */
-  Owner = 'OWNER',
+  Owner = 'OWNER'
 }
 
 /**
@@ -4341,8 +4387,15 @@ export type UserRecommendingPublicationEdge = {
   totalFollowersGained: Scalars['Int']['output'];
 };
 
+/** Role of the user within Hashnode */
+export enum UserRole {
+  Moderator = 'MODERATOR',
+  Superuser = 'SUPERUSER',
+  User = 'USER'
+}
+
 export enum ValidationMethod {
-  Id = 'ID',
+  Id = 'ID'
 }
 
 /**
@@ -4385,6 +4438,7 @@ export type Webhook = Node & {
   url: Scalars['String']['output'];
 };
 
+
 export type WebhookMessagesArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   first: Scalars['Int']['input'];
@@ -4396,7 +4450,7 @@ export enum WebhookEvent {
   PostUpdated = 'POST_UPDATED',
   StaticPageDeleted = 'STATIC_PAGE_DELETED',
   StaticPageEdited = 'STATIC_PAGE_EDITED',
-  StaticPagePublished = 'STATIC_PAGE_PUBLISHED',
+  StaticPagePublished = 'STATIC_PAGE_PUBLISHED'
 }
 
 export type WebhookMessage = Node & {
@@ -4466,7 +4520,7 @@ export type Widget = Node & {
 
 export enum WidgetPinLocation {
   Bottom = 'BOTTOM',
-  Top = 'TOP',
+  Top = 'TOP'
 }
 
 export type WidgetPinSettings = {
@@ -4482,42 +4536,8 @@ export type PostQueryVariables = Exact<{
   slug: Scalars['String']['input'];
 }>;
 
-export type PostQuery = {
-  __typename?: 'Query';
-  publication?: {
-    __typename?: 'Publication';
-    post?: {
-      __typename?: 'Post';
-      id: string;
-      url: string;
-      slug: string;
-      title: string;
-      subtitle?: string | null;
-      brief: string;
-      publishedAt: any;
-      views: number;
-      responseCount: number;
-      hasLatexInPost: boolean;
-      ogMetaData?: {
-        __typename?: 'OpenGraphMetaData';
-        image?: string | null;
-      } | null;
-      seo?: {
-        __typename?: 'SEO';
-        title?: string | null;
-        description?: string | null;
-      } | null;
-      author: {
-        __typename?: 'User';
-        name: string;
-        username: string;
-        profilePicture?: string | null;
-      };
-      coverImage?: { __typename?: 'PostCoverImage'; url: string } | null;
-      content: { __typename?: 'Content'; html: string; markdown: string };
-    } | null;
-  } | null;
-};
+
+export type PostQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', post?: { __typename?: 'Post', id: string, url: string, slug: string, title: string, subtitle?: string | null, brief: string, publishedAt: any, views: number, responseCount: number, hasLatexInPost: boolean, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, content: { __typename?: 'Content', html: string, markdown: string } } | null } | null };
 
 export type PostsQueryVariables = Exact<{
   host?: InputMaybe<Scalars['String']['input']>;
@@ -4525,77 +4545,17 @@ export type PostsQueryVariables = Exact<{
   page: Scalars['Int']['input'];
 }>;
 
-export type PostsQuery = {
-  __typename?: 'Query';
-  publication?: {
-    __typename?: 'Publication';
-    postsViaPage: {
-      __typename?: 'PublicationPostPageConnection';
-      nodes: Array<{
-        __typename?: 'Post';
-        id: string;
-        slug: string;
-        title: string;
-        views: number;
-        publishedAt: any;
-        coverImage?: { __typename?: 'PostCoverImage'; url: string } | null;
-      }>;
-      pageInfo: {
-        __typename?: 'OffsetPageInfo';
-        hasNextPage?: boolean | null;
-        nextPage?: number | null;
-      };
-    };
-  } | null;
-};
+
+export type PostsQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', postsViaPage: { __typename?: 'PublicationPostPageConnection', nodes: Array<{ __typename?: 'Post', id: string, slug: string, title: string, views: number, publishedAt: any, coverImage?: { __typename?: 'PostCoverImage', url: string } | null }>, pageInfo: { __typename?: 'OffsetPageInfo', hasNextPage?: boolean | null, nextPage?: number | null } } } | null };
 
 export type PublicationQueryVariables = Exact<{
   host?: InputMaybe<Scalars['String']['input']>;
 }>;
 
-export type PublicationQuery = {
-  __typename?: 'Query';
-  publication?: {
-    __typename?: 'Publication';
-    id: string;
-    descriptionSEO?: string | null;
-    displayTitle?: string | null;
-    title: string;
-    ogMetaData: { __typename?: 'OpenGraphMetaData'; image?: string | null };
-    links?: {
-      __typename?: 'PublicationLinks';
-      twitter?: string | null;
-      instagram?: string | null;
-      github?: string | null;
-      website?: string | null;
-      hashnode?: string | null;
-      youtube?: string | null;
-      linkedin?: string | null;
-      mastodon?: string | null;
-    } | null;
-    posts: {
-      __typename?: 'PublicationPostConnection';
-      edges: Array<{
-        __typename?: 'PostEdge';
-        node: {
-          __typename?: 'Post';
-          id: string;
-          slug: string;
-          title: string;
-          brief: string;
-          coverImage?: { __typename?: 'PostCoverImage'; url: string } | null;
-        };
-      }>;
-    };
-    author: {
-      __typename?: 'User';
-      name: string;
-      profilePicture?: string | null;
-      location?: string | null;
-      bio?: { __typename?: 'Content'; html: string; text: string } | null;
-    };
-  } | null;
-};
+
+export type PublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, descriptionSEO?: string | null, displayTitle?: string | null, title: string, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, instagram?: string | null, github?: string | null, website?: string | null, hashnode?: string | null, youtube?: string | null, linkedin?: string | null, mastodon?: string | null } | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, slug: string, title: string, brief: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }> }, author: { __typename?: 'User', name: string, profilePicture?: string | null, location?: string | null, bio?: { __typename?: 'Content', html: string, text: string } | null } } | null };
+
+
 
 export const PostDocument = `
     query Post($host: String, $slug: String!) {
@@ -4635,60 +4595,49 @@ export const PostDocument = `
 }
     `;
 
-export const usePostQuery = <TData = PostQuery, TError = unknown>(
-  variables: PostQueryVariables,
-  options?: Omit<UseQueryOptions<PostQuery, TError, TData>, 'queryKey'> & {
-    queryKey?: UseQueryOptions<PostQuery, TError, TData>['queryKey'];
-  }
-) => {
-  return useQuery<PostQuery, TError, TData>({
+export const usePostQuery = <
+      TData = PostQuery,
+      TError = unknown
+    >(
+      variables: PostQueryVariables,
+      options?: Omit<UseQueryOptions<PostQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<PostQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<PostQuery, TError, TData>(
+      {
     queryKey: ['Post', variables],
     queryFn: fetchData<PostQuery, PostQueryVariables>(PostDocument, variables),
-    ...options,
-  });
-};
+    ...options
+  }
+    )};
 
 usePostQuery.document = PostDocument;
 
 usePostQuery.getKey = (variables: PostQueryVariables) => ['Post', variables];
 
 export const useInfinitePostQuery = <
-  TData = InfiniteData<PostQuery>,
-  TError = unknown,
->(
-  variables: PostQueryVariables,
-  options: Omit<
-    UseInfiniteQueryOptions<PostQuery, TError, TData>,
-    'queryKey'
-  > & {
-    queryKey?: UseInfiniteQueryOptions<PostQuery, TError, TData>['queryKey'];
-  }
-) => {
-  return useInfiniteQuery<PostQuery, TError, TData>(
-    (() => {
-      const { queryKey: optionsQueryKey, ...restOptions } = options;
-      return {
-        queryKey: optionsQueryKey ?? ['Post.infinite', variables],
-        queryFn: (metaData) =>
-          fetchData<PostQuery, PostQueryVariables>(PostDocument, {
-            ...variables,
-            ...(metaData.pageParam ?? {}),
-          })(),
-        ...restOptions,
-      };
-    })()
-  );
-};
+      TData = InfiniteData<PostQuery>,
+      TError = unknown
+    >(
+      variables: PostQueryVariables,
+      options: Omit<UseInfiniteQueryOptions<PostQuery, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<PostQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useInfiniteQuery<PostQuery, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? ['Post.infinite', variables],
+      queryFn: (metaData) => fetchData<PostQuery, PostQueryVariables>(PostDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      ...restOptions
+    }
+  })()
+    )};
 
-useInfinitePostQuery.getKey = (variables: PostQueryVariables) => [
-  'Post.infinite',
-  variables,
-];
+useInfinitePostQuery.getKey = (variables: PostQueryVariables) => ['Post.infinite', variables];
 
-usePostQuery.fetcher = (
-  variables: PostQueryVariables,
-  options?: RequestInit['headers']
-) => fetchData<PostQuery, PostQueryVariables>(PostDocument, variables, options);
+
+usePostQuery.fetcher = (variables: PostQueryVariables, options?: RequestInit['headers']) => fetchData<PostQuery, PostQueryVariables>(PostDocument, variables, options);
 
 export const PostsDocument = `
     query Posts($host: String, $pageSize: Int!, $page: Int!) {
@@ -4713,64 +4662,49 @@ export const PostsDocument = `
 }
     `;
 
-export const usePostsQuery = <TData = PostsQuery, TError = unknown>(
-  variables: PostsQueryVariables,
-  options?: Omit<UseQueryOptions<PostsQuery, TError, TData>, 'queryKey'> & {
-    queryKey?: UseQueryOptions<PostsQuery, TError, TData>['queryKey'];
-  }
-) => {
-  return useQuery<PostsQuery, TError, TData>({
+export const usePostsQuery = <
+      TData = PostsQuery,
+      TError = unknown
+    >(
+      variables: PostsQueryVariables,
+      options?: Omit<UseQueryOptions<PostsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<PostsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<PostsQuery, TError, TData>(
+      {
     queryKey: ['Posts', variables],
-    queryFn: fetchData<PostsQuery, PostsQueryVariables>(
-      PostsDocument,
-      variables
-    ),
-    ...options,
-  });
-};
+    queryFn: fetchData<PostsQuery, PostsQueryVariables>(PostsDocument, variables),
+    ...options
+  }
+    )};
 
 usePostsQuery.document = PostsDocument;
 
 usePostsQuery.getKey = (variables: PostsQueryVariables) => ['Posts', variables];
 
 export const useInfinitePostsQuery = <
-  TData = InfiniteData<PostsQuery>,
-  TError = unknown,
->(
-  variables: PostsQueryVariables,
-  options: Omit<
-    UseInfiniteQueryOptions<PostsQuery, TError, TData>,
-    'queryKey'
-  > & {
-    queryKey?: UseInfiniteQueryOptions<PostsQuery, TError, TData>['queryKey'];
-  }
-) => {
-  return useInfiniteQuery<PostsQuery, TError, TData>(
-    (() => {
-      const { queryKey: optionsQueryKey, ...restOptions } = options;
-      return {
-        queryKey: optionsQueryKey ?? ['Posts.infinite', variables],
-        queryFn: (metaData) =>
-          fetchData<PostsQuery, PostsQueryVariables>(PostsDocument, {
-            ...variables,
-            ...(metaData.pageParam ?? {}),
-          })(),
-        ...restOptions,
-      };
-    })()
-  );
-};
+      TData = InfiniteData<PostsQuery>,
+      TError = unknown
+    >(
+      variables: PostsQueryVariables,
+      options: Omit<UseInfiniteQueryOptions<PostsQuery, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<PostsQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useInfiniteQuery<PostsQuery, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? ['Posts.infinite', variables],
+      queryFn: (metaData) => fetchData<PostsQuery, PostsQueryVariables>(PostsDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      ...restOptions
+    }
+  })()
+    )};
 
-useInfinitePostsQuery.getKey = (variables: PostsQueryVariables) => [
-  'Posts.infinite',
-  variables,
-];
+useInfinitePostsQuery.getKey = (variables: PostsQueryVariables) => ['Posts.infinite', variables];
 
-usePostsQuery.fetcher = (
-  variables: PostsQueryVariables,
-  options?: RequestInit['headers']
-) =>
-  fetchData<PostsQuery, PostsQueryVariables>(PostsDocument, variables, options);
+
+usePostsQuery.fetcher = (variables: PostsQueryVariables, options?: RequestInit['headers']) => fetchData<PostsQuery, PostsQueryVariables>(PostsDocument, variables, options);
 
 export const PublicationDocument = `
     query Publication($host: String) {
@@ -4818,77 +4752,46 @@ export const PublicationDocument = `
 }
     `;
 
-export const usePublicationQuery = <TData = PublicationQuery, TError = unknown>(
-  variables?: PublicationQueryVariables,
-  options?: Omit<
-    UseQueryOptions<PublicationQuery, TError, TData>,
-    'queryKey'
-  > & {
-    queryKey?: UseQueryOptions<PublicationQuery, TError, TData>['queryKey'];
+export const usePublicationQuery = <
+      TData = PublicationQuery,
+      TError = unknown
+    >(
+      variables?: PublicationQueryVariables,
+      options?: Omit<UseQueryOptions<PublicationQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<PublicationQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<PublicationQuery, TError, TData>(
+      {
+    queryKey: variables === undefined ? ['Publication'] : ['Publication', variables],
+    queryFn: fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, variables),
+    ...options
   }
-) => {
-  return useQuery<PublicationQuery, TError, TData>({
-    queryKey:
-      variables === undefined ? ['Publication'] : ['Publication', variables],
-    queryFn: fetchData<PublicationQuery, PublicationQueryVariables>(
-      PublicationDocument,
-      variables
-    ),
-    ...options,
-  });
-};
+    )};
 
 usePublicationQuery.document = PublicationDocument;
 
-usePublicationQuery.getKey = (variables?: PublicationQueryVariables) =>
-  variables === undefined ? ['Publication'] : ['Publication', variables];
+usePublicationQuery.getKey = (variables?: PublicationQueryVariables) => variables === undefined ? ['Publication'] : ['Publication', variables];
 
 export const useInfinitePublicationQuery = <
-  TData = InfiniteData<PublicationQuery>,
-  TError = unknown,
->(
-  variables: PublicationQueryVariables,
-  options: Omit<
-    UseInfiniteQueryOptions<PublicationQuery, TError, TData>,
-    'queryKey'
-  > & {
-    queryKey?: UseInfiniteQueryOptions<
-      PublicationQuery,
-      TError,
-      TData
-    >['queryKey'];
-  }
-) => {
-  return useInfiniteQuery<PublicationQuery, TError, TData>(
-    (() => {
-      const { queryKey: optionsQueryKey, ...restOptions } = options;
-      return {
-        queryKey:
-          optionsQueryKey ?? variables === undefined
-            ? ['Publication.infinite']
-            : ['Publication.infinite', variables],
-        queryFn: (metaData) =>
-          fetchData<PublicationQuery, PublicationQueryVariables>(
-            PublicationDocument,
-            { ...variables, ...(metaData.pageParam ?? {}) }
-          )(),
-        ...restOptions,
-      };
-    })()
-  );
-};
+      TData = InfiniteData<PublicationQuery>,
+      TError = unknown
+    >(
+      variables: PublicationQueryVariables,
+      options: Omit<UseInfiniteQueryOptions<PublicationQuery, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<PublicationQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useInfiniteQuery<PublicationQuery, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? variables === undefined ? ['Publication.infinite'] : ['Publication.infinite', variables],
+      queryFn: (metaData) => fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      ...restOptions
+    }
+  })()
+    )};
 
-useInfinitePublicationQuery.getKey = (variables?: PublicationQueryVariables) =>
-  variables === undefined
-    ? ['Publication.infinite']
-    : ['Publication.infinite', variables];
+useInfinitePublicationQuery.getKey = (variables?: PublicationQueryVariables) => variables === undefined ? ['Publication.infinite'] : ['Publication.infinite', variables];
 
-usePublicationQuery.fetcher = (
-  variables?: PublicationQueryVariables,
-  options?: RequestInit['headers']
-) =>
-  fetchData<PublicationQuery, PublicationQueryVariables>(
-    PublicationDocument,
-    variables,
-    options
-  );
+
+usePublicationQuery.fetcher = (variables?: PublicationQueryVariables, options?: RequestInit['headers']) => fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, variables, options);
