@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { usePublicationQuery } from '../../generated/graphq';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST as string;
 
 export const Blogs = () => {
@@ -12,6 +13,7 @@ export const Blogs = () => {
   });
 
   if (!data || !data.publication) return null;
+  const posts = data.publication.posts.edges
 
   return (
     <div className='flex w-full flex-col items-start rounded-3xl bg-white p-6 text-slate-950 shadow-lg dark:border dark:border-slate-800 dark:bg-slate-900 dark:text-zinc-300'>
@@ -25,9 +27,11 @@ export const Blogs = () => {
         </Link>
       </div>
       <div className='flex w-full flex-col gap-5 sm:flex-row sm:justify-center md:gap-8'>
-        {data.publication.posts.edges.map((edge) => (
+        {posts.length > 0 ? posts.map((edge) => (
           <SingleBlog blogInfo={edge.node} key={edge.node.id} />
-        ))}
+        )) : (
+          <p className='text-lg flex gap-3 items-center font-semibold'><ExclamationTriangleIcon className='h-8 w-8' />No posts found</p>
+        )}
       </div>
       <Link
         href={'/blog'}

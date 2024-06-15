@@ -79,7 +79,7 @@ export default function Blog() {
           Blogs
         </h1>
         {
-          posts.length === 0 && <p className='text-lg flex gap-3 items-center'><ExclamationTriangleIcon className='h-8 w-8' />No Posts Found</p>
+          posts.length === 0 && <p className='text-lg flex gap-3 items-center'><ExclamationTriangleIcon className='h-8 w-8' />No posts found</p>
         }
         {
           posts.length > 0 && <div
