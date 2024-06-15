@@ -20,14 +20,14 @@ export const PostHeader = ({
         {title}
       </h1>
       <div className='flex w-full justify-between'>
-        <div className='flex items-center gap-2'>
+        <Link href='/' className='flex items-center gap-2'>
           {profileImage && (
             <div className='flex h-8 w-8 overflow-hidden rounded-full'>
               <Image src={profileImage} width={200} height={200} alt={name} />
             </div>
           )}
-          <Link href='/'>{name}</Link>
-        </div>
+          <span>{name}</span>
+        </Link>
       </div>
     </div>
   );

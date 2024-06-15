@@ -4537,7 +4537,7 @@ export type PostQueryVariables = Exact<{
 }>;
 
 
-export type PostQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', post?: { __typename?: 'Post', id: string, url: string, slug: string, title: string, subtitle?: string | null, brief: string, publishedAt: any, views: number, responseCount: number, hasLatexInPost: boolean, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, content: { __typename?: 'Content', html: string, markdown: string } } | null } | null };
+export type PostQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', url: string, post?: { __typename?: 'Post', id: string, url: string, slug: string, title: string, subtitle?: string | null, brief: string, publishedAt: any, views: number, responseCount: number, readTimeInMinutes: number, reactionCount: number, hasLatexInPost: boolean, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null, author: { __typename?: 'User', name: string, username: string, profilePicture?: string | null }, coverImage?: { __typename?: 'PostCoverImage', url: string } | null, content: { __typename?: 'Content', html: string, markdown: string } } | null } | null };
 
 export type PostsQueryVariables = Exact<{
   host?: InputMaybe<Scalars['String']['input']>;
@@ -4553,13 +4553,22 @@ export type PublicationQueryVariables = Exact<{
 }>;
 
 
-export type PublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, descriptionSEO?: string | null, displayTitle?: string | null, title: string, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, instagram?: string | null, github?: string | null, website?: string | null, hashnode?: string | null, youtube?: string | null, linkedin?: string | null, mastodon?: string | null } | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, slug: string, title: string, brief: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }> }, author: { __typename?: 'User', name: string, profilePicture?: string | null, location?: string | null, bio?: { __typename?: 'Content', html: string, text: string } | null } } | null };
+export type PublicationQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', id: string, descriptionSEO?: string | null, displayTitle?: string | null, title: string, isTeam: boolean, favicon?: string | null, followersCount?: number | null, preferences: { __typename?: 'Preferences', logo?: string | null }, ogMetaData: { __typename?: 'OpenGraphMetaData', image?: string | null }, links?: { __typename?: 'PublicationLinks', twitter?: string | null, instagram?: string | null, github?: string | null, website?: string | null, hashnode?: string | null, youtube?: string | null, linkedin?: string | null, mastodon?: string | null } | null, posts: { __typename?: 'PublicationPostConnection', edges: Array<{ __typename?: 'PostEdge', node: { __typename?: 'Post', id: string, slug: string, title: string, brief: string, coverImage?: { __typename?: 'PostCoverImage', url: string } | null } }> }, author: { __typename?: 'User', name: string, profilePicture?: string | null, location?: string | null, bio?: { __typename?: 'Content', html: string, text: string } | null } } | null };
+
+export type StaticPageQueryVariables = Exact<{
+  host?: InputMaybe<Scalars['String']['input']>;
+  slug: Scalars['String']['input'];
+}>;
+
+
+export type StaticPageQuery = { __typename?: 'Query', publication?: { __typename?: 'Publication', staticPage?: { __typename?: 'StaticPage', id: string, title: string, slug: string, hidden: boolean, content: { __typename?: 'Content', markdown: string, html: string }, ogMetaData?: { __typename?: 'OpenGraphMetaData', image?: string | null } | null, seo?: { __typename?: 'SEO', title?: string | null, description?: string | null } | null } | null } | null };
 
 
 
 export const PostDocument = `
     query Post($host: String, $slug: String!) {
   publication(host: $host) {
+    url
     post(slug: $slug) {
       id
       url
@@ -4570,6 +4579,8 @@ export const PostDocument = `
       publishedAt
       views
       responseCount
+      readTimeInMinutes
+      reactionCount
       hasLatexInPost
       ogMetaData {
         image
@@ -4713,6 +4724,12 @@ export const PublicationDocument = `
     descriptionSEO
     displayTitle
     title
+    isTeam
+    favicon
+    followersCount
+    preferences {
+      logo
+    }
     ogMetaData {
       image
     }
@@ -4795,3 +4812,71 @@ useInfinitePublicationQuery.getKey = (variables?: PublicationQueryVariables) => 
 
 
 usePublicationQuery.fetcher = (variables?: PublicationQueryVariables, options?: RequestInit['headers']) => fetchData<PublicationQuery, PublicationQueryVariables>(PublicationDocument, variables, options);
+
+export const StaticPageDocument = `
+    query StaticPage($host: String, $slug: String!) {
+  publication(host: $host) {
+    staticPage(slug: $slug) {
+      id
+      title
+      slug
+      content {
+        markdown
+        html
+      }
+      hidden
+      ogMetaData {
+        image
+      }
+      seo {
+        title
+        description
+      }
+    }
+  }
+}
+    `;
+
+export const useStaticPageQuery = <
+      TData = StaticPageQuery,
+      TError = unknown
+    >(
+      variables: StaticPageQueryVariables,
+      options?: Omit<UseQueryOptions<StaticPageQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<StaticPageQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useQuery<StaticPageQuery, TError, TData>(
+      {
+    queryKey: ['StaticPage', variables],
+    queryFn: fetchData<StaticPageQuery, StaticPageQueryVariables>(StaticPageDocument, variables),
+    ...options
+  }
+    )};
+
+useStaticPageQuery.document = StaticPageDocument;
+
+useStaticPageQuery.getKey = (variables: StaticPageQueryVariables) => ['StaticPage', variables];
+
+export const useInfiniteStaticPageQuery = <
+      TData = InfiniteData<StaticPageQuery>,
+      TError = unknown
+    >(
+      variables: StaticPageQueryVariables,
+      options: Omit<UseInfiniteQueryOptions<StaticPageQuery, TError, TData>, 'queryKey'> & { queryKey?: UseInfiniteQueryOptions<StaticPageQuery, TError, TData>['queryKey'] }
+    ) => {
+    
+    return useInfiniteQuery<StaticPageQuery, TError, TData>(
+      (() => {
+    const { queryKey: optionsQueryKey, ...restOptions } = options;
+    return {
+      queryKey: optionsQueryKey ?? ['StaticPage.infinite', variables],
+      queryFn: (metaData) => fetchData<StaticPageQuery, StaticPageQueryVariables>(StaticPageDocument, {...variables, ...(metaData.pageParam ?? {})})(),
+      ...restOptions
+    }
+  })()
+    )};
+
+useInfiniteStaticPageQuery.getKey = (variables: StaticPageQueryVariables) => ['StaticPage.infinite', variables];
+
+
+useStaticPageQuery.fetcher = (variables: StaticPageQueryVariables, options?: RequestInit['headers']) => fetchData<StaticPageQuery, StaticPageQueryVariables>(StaticPageDocument, variables, options);

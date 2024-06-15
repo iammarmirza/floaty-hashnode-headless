@@ -4,6 +4,12 @@ query Publication($host: String) {
     descriptionSEO
     displayTitle
     title
+    isTeam
+    favicon
+    followersCount
+    preferences {
+      logo
+    }
     ogMetaData {
       image
     }

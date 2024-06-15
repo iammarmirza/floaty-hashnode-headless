@@ -12,7 +12,7 @@ import {
 import { faGlobe } from '@fortawesome/free-solid-svg-icons';
 
 export const SOCIAL_LINKS: {
-  [key in keyof PublicationLinks as string]: IconDefinition;
+  [key in keyof PublicationLinks]: IconDefinition;
 } = {
   instagram: faInstagram,
   github: faGithub,

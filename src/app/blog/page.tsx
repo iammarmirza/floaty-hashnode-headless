@@ -7,16 +7,15 @@ import {
 } from '../../../generated/graphq';
 import { Post } from '@/components/Post';
 import {
-  measureElement,
   useVirtualizer,
-  Virtualizer,
 } from '@tanstack/react-virtual';
 import { useCallback, useEffect, useRef } from 'react';
+import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
 const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST as string;
 
 export default function Blog() {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
+  const { data, fetchNextPage, hasNextPage, isFetchingNextPage, error } =
     useInfinitePostsQuery(
       {
         host,
@@ -37,8 +36,10 @@ export default function Blog() {
       }
     );
 
+  if (!data || error) throw new Error()
+
   const posts =
-    data?.pages.flatMap((page) => page.publication?.postsViaPage.nodes) || [];
+    data.pages.flatMap((page) => page.publication?.postsViaPage.nodes) || [];
   const parentRef = useRef(null);
 
   const rowVirtualizer = useVirtualizer({
@@ -77,38 +78,43 @@ export default function Blog() {
         <h1 className='text-3xl font-semibold md:text-4xl dark:text-zinc-100'>
           Blogs
         </h1>
-        <div
-          ref={parentRef}
-          className='flex h-[400px] w-full flex-col overflow-auto rounded-lg'
-        >
-          <div
-            className='relative w-full'
-            style={{
-              height: rowVirtualizer.getTotalSize(),
-            }}
+        {
+          posts.length === 0 && <p className='text-lg flex gap-3 items-center'><ExclamationTriangleIcon className='h-8 w-8' />No Posts Found</p>
+        }
+        {
+          posts.length > 0 && <div
+            ref={parentRef}
+            className='flex h-[400px] w-full flex-col overflow-auto rounded-lg'
           >
-            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
-              const isLoaderRow = virtualRow.index > posts.length - 1;
-              const post = posts[virtualRow.index];
+            <div
+              className='relative w-full'
+              style={{
+                height: rowVirtualizer.getTotalSize(),
+              }}
+            >
+              {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+                const isLoaderRow = virtualRow.index > posts.length - 1;
+                const post = posts[virtualRow.index];
 
-              return (
-                <div
-                  key={virtualRow.index}
-                  data-index={virtualRow.index}
-                  className='absolute w-full'
-                  ref={rowVirtualizer.measureElement}
-                  style={{
-                    transform: `translateY(${virtualRow.start}px)`,
-                  }}
-                >
-                  <Post postInfo={post} />
-                  {isLoaderRow && hasNextPage && 'Loading...'}
-                  {isLoaderRow && !hasNextPage && 'You have reached the end'}
-                </div>
-              );
-            })}
+                return (
+                  <div
+                    key={virtualRow.index}
+                    data-index={virtualRow.index}
+                    className='absolute w-full'
+                    ref={rowVirtualizer.measureElement}
+                    style={{
+                      transform: `translateY(${virtualRow.start}px)`,
+                    }}
+                  >
+                    <Post postInfo={post} />
+                    {isLoaderRow && hasNextPage && 'Loading...'}
+                    {isLoaderRow && !hasNextPage && 'You have reached the end'}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        }
       </div>
       <ContactMe />
     </Container>

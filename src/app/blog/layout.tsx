@@ -1,5 +1,6 @@
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 import {
+  PostsQuery,
   useInfinitePostsQuery,
   usePostsQuery,
 } from '../../../generated/graphq';

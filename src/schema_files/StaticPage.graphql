@@ -1,0 +1,21 @@
+query StaticPage($host: String, $slug: String!) {
+  publication(host: $host) {
+    staticPage(slug: $slug) {
+      id
+      title
+      slug
+      content {
+        markdown
+        html
+      }
+      hidden
+      ogMetaData {
+        image
+      }
+      seo {
+        title
+        description
+      }
+    }
+  }
+}

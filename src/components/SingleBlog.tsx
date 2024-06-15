@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
@@ -42,7 +41,7 @@ export const SingleBlog = (props: SingleBlogProps) => {
         {coverImageSrc && (
           <CoverImage title={title} src={coverImageSrc} priority={true} />
         )}
-        <h3 className='text-xl font-semibold dark:text-zinc-100'>{title}</h3>
+        <h3 className='text-xl font-semibold dark:text-zinc-100 line-clamp-2'>{title}</h3>
         <p className='lg:mb-8 line-clamp-3 text-justify text-sm leading-snug text-slate-500 dark:text-zinc-300'>
           {brief}
         </p>

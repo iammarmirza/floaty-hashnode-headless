@@ -2,7 +2,7 @@
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { SOCIAL_LINKS } from '@/utils/consts';
-import { usePublicationQuery } from '../../generated/graphq';
+import { PublicationLinks, usePublicationQuery } from '../../generated/graphq';
 const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST as string;
 
 export const SocialLinks = () => {
@@ -13,7 +13,7 @@ export const SocialLinks = () => {
   if (!data?.publication?.links) return null;
   const links = Object.entries(data.publication.links).filter(
     ([key, value]) => value
-  );
+  ) as Array<[keyof PublicationLinks, string]>;
 
   return (
     <div className='flex flex-wrap gap-3 md:gap-4'>
@@ -25,8 +25,8 @@ export const SocialLinks = () => {
           key={socialName}
         >
           <FontAwesomeIcon
-            icon={SOCIAL_LINKS[socialName]}
-            className='h-4 w-4 md:h-5 md:w-5'
+            icon={SOCIAL_LINKS[socialName]!}
+            className='h-5 w-5'
           />
         </a>
       ))}
