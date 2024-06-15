@@ -25,10 +25,10 @@ export const SOCIAL_LINKS: {
 };
 
 export const PROJECTS: {
-  name: string
-  url?: string
-  demoLink?: string
-  imageUrl?: string
+  name: string;
+  url?: string;
+  demoLink?: string;
+  imageUrl?: string;
 }[] = [
   {
     name: 'Project 1',

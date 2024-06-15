@@ -28,10 +28,9 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
     }),
   });
 
-  if(!data || error) throw new Error()
-  const post = data.publication?.post
-  if(!post) notFound()
-    
+  if (!data || error) throw new Error();
+  const post = data.publication?.post;
+  if (!post) notFound();
 
   const [, setMobMount] = useState(false);
   const [canLoadEmbeds, setCanLoadEmbeds] = useState(false);
@@ -53,8 +52,6 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
     })();
   }, []);
 
-
-  
   if (post.hasLatexInPost) {
     setTimeout(() => {
       handleMathJax(true);
@@ -69,8 +66,6 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
       })
     : undefined;
 
-  
-
   return (
     <Container>
       <article className='w-full rounded-3xl bg-white p-4 shadow-md md:p-8 dark:border dark:border-slate-800 dark:bg-slate-900'>
@@ -83,7 +78,7 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
           profileImage={post.author.profilePicture}
           subtitle={post.subtitle}
         />
-        <hr className='mb-6 border-0 h-px bg-slate-800 mx-5' />
+        <hr className='mx-5 mb-6 h-px border-0 bg-slate-800' />
         {post.content.markdown && (
           <MarkdownToHtml contentMarkdown={post.content.markdown} />
         )}

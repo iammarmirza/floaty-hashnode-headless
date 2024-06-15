@@ -35,15 +35,14 @@ export async function generateMetadata(
     })
   );
 
-  if (!data?.publication) return {
-
-  }
+  if (!data?.publication) return {};
 
   return {
     title: data.publication.author.name,
     description:
       data.publication.descriptionSEO ||
-      `${data.publication.author.name}'s Blog` || '',
+      `${data.publication.author.name}'s Blog` ||
+      '',
     twitter: {
       card: 'summary_large_image',
       title:
@@ -53,7 +52,8 @@ export async function generateMetadata(
       description:
         data.publication.descriptionSEO ||
         data.publication.title ||
-        `${data.publication.author.name}'s Blog` || '',
+        `${data.publication.author.name}'s Blog` ||
+        '',
       images: [
         {
           url:
@@ -72,7 +72,8 @@ export async function generateMetadata(
       description:
         data.publication.descriptionSEO ||
         data.publication.title ||
-        `${data.publication.author.name}'s Blog` || '',
+        `${data.publication.author.name}'s Blog` ||
+        '',
       images: [
         {
           url:
@@ -108,15 +109,16 @@ export default async function RootLayout({
     })
   );
 
-  if (!data?.publication) throw new Error('Please check the host name in your .env file')
+  if (!data?.publication)
+    throw new Error('Please check the host name in your .env file');
 
   return (
     <html lang='en'>
       <body className={`${inter.className} bg-slate-300 dark:bg-slate-950`}>
         <ReactQueryProvider>
           <HydrationBoundary state={dehydrate(queryClient)}>
-              {children}
-              <Navbar />
+            {children}
+            <Navbar />
           </HydrationBoundary>
         </ReactQueryProvider>
       </body>

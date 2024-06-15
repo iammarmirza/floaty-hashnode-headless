@@ -32,30 +32,32 @@ export const SingleProject = (props: SingleProjectProps) => {
               className='flex-1'
             />
           </div>
-        ) : (<div className='flex aspect-video w-full rounded-xl bg-slate-300 dark:bg-slate-950 justify-center items-center'>
-          <p className='text-slate-950 dark:text-zinc-300 font-semibold'><PhotoIcon className='h-12 w-12'/></p>
-        </div>)}
+        ) : (
+          <div className='flex aspect-video w-full items-center justify-center rounded-xl bg-slate-300 dark:bg-slate-950'>
+            <p className='font-semibold text-slate-950 dark:text-zinc-300'>
+              <PhotoIcon className='h-12 w-12' />
+            </p>
+          </div>
+        )}
         <p className='text-xl font-semibold dark:text-zinc-100'>
           {project.name}
         </p>
         <div className='flex w-full flex-row items-center gap-2 text-xs'>
-          {
-            project.url ? (<a
+          {project.url ? (
+            <a
               href={`//${project.url}`}
               target='_blank'
               className='flex items-center gap-2 rounded-full px-2 py-1 hover:bg-slate-600 hover:text-white dark:hover:bg-slate-950 dark:hover:text-zinc-300'
             >
               <FontAwesomeIcon icon={faGithub} />
               Source Code
-            </a>) : (
-              <div
-                className='flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 hover:bg-slate-600 hover:text-white dark:hover:bg-slate-950 dark:hover:text-zinc-300'
-              >
-                <FontAwesomeIcon icon={faGithub} />
-                Source Code
-              </div>
-            )
-          }
+            </a>
+          ) : (
+            <div className='flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 hover:bg-slate-600 hover:text-white dark:hover:bg-slate-950 dark:hover:text-zinc-300'>
+              <FontAwesomeIcon icon={faGithub} />
+              Source Code
+            </div>
+          )}
           {project.demoLink ? (
             <a
               href={`//${project.demoLink}`}
@@ -66,9 +68,7 @@ export const SingleProject = (props: SingleProjectProps) => {
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             </a>
           ) : (
-            <div
-              className='flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 hover:bg-slate-600 hover:text-white dark:hover:bg-slate-950 dark:hover:text-zinc-300'
-            >
+            <div className='flex cursor-pointer items-center gap-2 rounded-full px-2 py-1 hover:bg-slate-600 hover:text-white dark:hover:bg-slate-950 dark:hover:text-zinc-300'>
               Live Demo
               <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
             </div>

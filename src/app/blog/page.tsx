@@ -6,9 +6,7 @@ import {
   usePostsQuery,
 } from '../../../generated/graphq';
 import { Post } from '@/components/Post';
-import {
-  useVirtualizer,
-} from '@tanstack/react-virtual';
+import { useVirtualizer } from '@tanstack/react-virtual';
 import { useCallback, useEffect, useRef } from 'react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
@@ -36,7 +34,7 @@ export default function Blog() {
       }
     );
 
-  if (!data || error) throw new Error()
+  if (!data || error) throw new Error();
 
   const posts =
     data.pages.flatMap((page) => page.publication?.postsViaPage.nodes) || [];
@@ -74,15 +72,18 @@ export default function Blog() {
 
   return (
     <Container>
-      <div className='flex flex-col items-center gap-5 rounded-3xl bg-white px-5 py-6 text-slate-950 dark:border dark:border-slate-800 dark:bg-slate-900 dark:text-zinc-300'>
+      <div className='flex min-h-80 flex-col items-center gap-5 rounded-3xl bg-white px-5 py-6 text-slate-950 dark:border dark:border-slate-800 dark:bg-slate-900 dark:text-zinc-300'>
         <h1 className='text-3xl font-semibold md:text-4xl dark:text-zinc-100'>
           Blogs
         </h1>
-        {
-          posts.length === 0 && <p className='text-lg flex gap-3 items-center'><ExclamationTriangleIcon className='h-8 w-8' />No posts found</p>
-        }
-        {
-          posts.length > 0 && <div
+        {posts.length === 0 && (
+          <p className='flex w-full flex-1 items-center justify-center gap-3 text-lg font-semibold'>
+            <ExclamationTriangleIcon className='h-8 w-8' />
+            No posts found
+          </p>
+        )}
+        {posts.length > 0 && (
+          <div
             ref={parentRef}
             className='flex h-[400px] w-full flex-col overflow-auto rounded-lg'
           >
@@ -114,7 +115,7 @@ export default function Blog() {
               })}
             </div>
           </div>
-        }
+        )}
       </div>
       <ContactMe />
     </Container>

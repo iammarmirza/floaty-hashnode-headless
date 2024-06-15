@@ -44,9 +44,7 @@ export async function generateMetadata(
     })
   );
   const post = data?.publication?.post!;
-  if(!post) return {
-    
-  }
+  if (!post) return {};
 
   return {
     title: post.seo?.title || post.title,

@@ -11,7 +11,7 @@ export const AboutMe = () => {
     host,
   });
 
-  if(!data?.publication || error) return null
+  if (!data?.publication || error) return null;
 
   const { publication } = data;
 
@@ -40,10 +40,10 @@ export const AboutMe = () => {
           <SocialLinks />
         </div>
         <div className='mb-4 flex flex-col gap-2'>
-          <p className='text-2xl font-semibold text-slate-950 sm:text-3xl dark:text-zinc-100 w-full'>{`Hi There! I am ${publication.author.name}!`}</p>
+          <p className='w-full text-2xl font-semibold text-slate-950 sm:text-3xl dark:text-zinc-100'>{`Hi There! I am ${publication.author.name}!`}</p>
           {publication.author.bio && (
             <div
-              className='text-slate-500 dark:text-zinc-300 text-justify lg:text-left'
+              className='text-justify text-slate-500 lg:text-left dark:text-zinc-300'
               dangerouslySetInnerHTML={{
                 __html: publication.author.bio.html || '',
               }}
