@@ -109,7 +109,6 @@ export default async function RootLayout({
   );
 
   if (!data?.publication) throw new Error('Please check the host name in your .env file')
-    throw new Error('')
 
   return (
     <html lang='en'>
