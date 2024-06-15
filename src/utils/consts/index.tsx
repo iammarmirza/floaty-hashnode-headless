@@ -24,19 +24,16 @@ export const SOCIAL_LINKS: {
   twitter: faXTwitter,
 };
 
-export const PROJECTS = [
+export const PROJECTS: {
+  name: string
+  url?: string
+  demoLink?: string
+  imageUrl?: string
+}[] = [
   {
-    name: 'Khadim e Zyaraat',
-    url: 'github.com/iammarmirza/khadim-e-zyaraat',
-    demoLink:
-      'khadim-e-zyaraat-git-main-ammar-mirzas-projects-f4eca922.vercel.app',
-    imageUrl: '/khadim-e-zyaraat.png',
+    name: 'Project 1',
   },
   {
-    name: 'Anime Searchbar',
-    url: 'github.com/iammarmirza/redux-toolkit-jikan-api',
-    demoLink:
-      'redux-toolkit-jikan-api-git-main-ammar-mirzas-projects-f4eca922.vercel.app',
-    imageUrl: '/anime-searchbar.png',
+    name: 'Project 2',
   },
 ];
