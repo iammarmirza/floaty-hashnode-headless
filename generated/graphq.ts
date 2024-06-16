@@ -4512,6 +4512,7 @@ export type PostQuery = {
       readTimeInMinutes: number;
       reactionCount: number;
       hasLatexInPost: boolean;
+      tags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null;
       ogMetaData?: {
         __typename?: 'OpenGraphMetaData';
         image?: string | null;
@@ -4661,6 +4662,10 @@ export const PostDocument = `
       readTimeInMinutes
       reactionCount
       hasLatexInPost
+      tags {
+        id
+        name
+      }
       ogMetaData {
         image
       }
@@ -4978,9 +4983,7 @@ export const useStaticPageQuery = <TData = StaticPageQuery, TError = unknown>(
   options?: Omit<
     UseQueryOptions<StaticPageQuery, TError, TData>,
     'queryKey'
-  > & {
-    queryKey?: UseQueryOptions<StaticPageQuery, TError, TData>['queryKey'];
-  }
+  > & { queryKey?: UseQueryOptions<StaticPageQuery, TError, TData>['queryKey'] }
 ) => {
   return useQuery<StaticPageQuery, TError, TData>({
     queryKey: ['StaticPage', variables],

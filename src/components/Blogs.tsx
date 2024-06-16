@@ -1,10 +1,11 @@
 'use client';
 import { SingleBlog } from './SingleBlog';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { usePublicationQuery } from '../../generated/graphq';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import {
+  ArrowRightIcon,
+  ExclamationTriangleIcon,
+} from '@heroicons/react/24/outline';
 const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST as string;
 
 export const Blogs = () => {
@@ -23,7 +24,7 @@ export const Blogs = () => {
           href={'/blog'}
           className='hidden flex-row items-center gap-2 rounded-full px-3 py-1 text-sm hover:bg-slate-600 hover:text-white md:flex dark:hover:bg-slate-950 dark:hover:text-zinc-300'
         >
-          All Blogs <FontAwesomeIcon icon={faArrowRight} />
+          All blogs <ArrowRightIcon className='h-4 w-4' />
         </Link>
       </div>
       {posts.length > 0 && (
@@ -43,7 +44,7 @@ export const Blogs = () => {
         href={'/blog'}
         className='mt-6 flex flex-row items-center gap-2 self-center rounded-full px-4 py-2 text-sm shadow-sm hover:bg-slate-600 hover:text-white sm:text-base md:hidden dark:hover:bg-slate-950 dark:hover:text-zinc-300'
       >
-        All Blogs <FontAwesomeIcon icon={faArrowRight} />
+        All blogs <ArrowRightIcon className='h-4 w-4' />
       </Link>
     </div>
   );

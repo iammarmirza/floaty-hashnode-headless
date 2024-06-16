@@ -72,7 +72,7 @@ export default function Blog() {
 
   return (
     <Container>
-      <div className='flex min-h-80 flex-col items-center gap-5 rounded-3xl bg-white px-5 py-6 text-slate-950 dark:border dark:border-slate-800 dark:bg-slate-900 dark:text-zinc-300'>
+      <div className='flex min-h-80 flex-col items-center gap-5 rounded-3xl bg-white py-6 text-slate-950 dark:border dark:border-slate-800 dark:bg-slate-900 dark:text-zinc-300'>
         <h1 className='text-3xl font-semibold md:text-4xl dark:text-zinc-100'>
           Blogs
         </h1>
@@ -85,7 +85,7 @@ export default function Blog() {
         {posts.length > 0 && (
           <div
             ref={parentRef}
-            className='flex h-[400px] w-full flex-col overflow-auto rounded-lg'
+            className='flex h-[400px] w-full flex-col overflow-auto rounded-lg px-5'
           >
             <div
               className='relative w-full'
@@ -109,7 +109,7 @@ export default function Blog() {
                   >
                     <Post postInfo={post} />
                     {isLoaderRow && hasNextPage && 'Loading...'}
-                    {isLoaderRow && !hasNextPage && 'You have reached the end'}
+                    {!hasNextPage && isLoaderRow && 'You have reached the end'}
                   </div>
                 );
               })}

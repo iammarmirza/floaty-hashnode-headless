@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChartSimple, faClockFour } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
+import { formatDate } from '@/utils/consts/format-date';
+import { ArrowTrendingUpIcon, ClockIcon } from '@heroicons/react/24/outline';
 
 interface PostProps {
   postInfo:
@@ -25,10 +25,6 @@ interface PostProps {
 
 export const Post = (props: PostProps) => {
   const { postInfo } = props;
-  const formatDate = (dateString: string) => {
-    const date = new Date(dateString).toDateString();
-    return date;
-  };
 
   if (!postInfo) return null;
 
@@ -50,16 +46,16 @@ export const Post = (props: PostProps) => {
       )}
       <div className='flex w-full flex-col px-3 text-slate-950 dark:text-zinc-300'>
         <h3 className='mb-5 line-clamp-3 text-xl font-semibold md:text-2xl dark:text-zinc-100'>
-          {postInfo?.title}
+          {postInfo.title}
         </h3>
         <div className='mb-3 flex w-full flex-row justify-between text-xs'>
-          <p className='flex flex-row items-center gap-2'>
-            <FontAwesomeIcon icon={faClockFour} />
-            {formatDate(postInfo?.publishedAt)}
+          <p className='flex flex-row items-center gap-1'>
+            <ClockIcon className='h-4 w-4' />
+            {formatDate(postInfo.publishedAt)}
           </p>
           <p className='flex flex-row items-center gap-2'>
-            <FontAwesomeIcon icon={faChartSimple} />
-            {postInfo?.views}
+            <ArrowTrendingUpIcon className='h-4 w-4' />
+            {postInfo.views}
           </p>
         </div>
       </div>

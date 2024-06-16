@@ -11,8 +11,8 @@ import { MarkdownToHtml } from '@/components/MarkdownToHtml';
 import { resizeImage } from '@/utils/image';
 import handleMathJax from '@/utils/handle-math-jax';
 import { CoverImage } from '@/components/CoverImage';
-import { PostHeader } from '@/components/PostHeader';
 import { notFound } from 'next/navigation';
+import { formatDate } from '@/utils/consts/format-date';
 
 const host = process.env.NEXT_PUBLIC_HASHNODE_PUBLICATION_HOST as string;
 
@@ -68,19 +68,41 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
 
   return (
     <Container>
-      <article className='w-full rounded-3xl bg-white p-4 shadow-md md:p-8 dark:border dark:border-slate-800 dark:bg-slate-900'>
-        {post.coverImage?.url && (
-          <CoverImage title={post.title} priority={true} src={coverImageSrc} />
-        )}
-        <PostHeader
-          title={post.title}
-          name={post.author.name}
-          profileImage={post.author.profilePicture}
-          subtitle={post.subtitle}
-        />
-        <hr className='mx-5 mb-6 h-px border-0 bg-slate-800' />
+      <article className='w-full rounded-3xl bg-white px-4 py-8 shadow-md md:px-8 dark:border dark:border-slate-800 dark:bg-slate-900'>
+        <div className='mb-4 flex w-full flex-col gap-5 text-slate-950 dark:text-zinc-300'>
+          <h1 className='mb-2 w-full text-center text-2xl font-bold md:text-3xl dark:text-zinc-100'>
+            {post.title}
+          </h1>
+          {post.coverImage?.url && (
+            <CoverImage
+              title={post.title}
+              priority={true}
+              src={coverImageSrc}
+            />
+          )}
+          <div className='flex w-full flex-wrap items-center justify-center text-sm'>
+            <span className='mr-4'>Written by: {post.author.name}</span>
+            <span>
+              Posted on <time>{formatDate(post.publishedAt)}</time>
+            </span>
+          </div>
+        </div>
+
+        <hr className='mx-5 mb-6 h-px border-0 bg-zinc-200 dark:bg-slate-800' />
         {post.content.markdown && (
           <MarkdownToHtml contentMarkdown={post.content.markdown} />
+        )}
+        {post.tags && (
+          <div className='flex w-full flex-wrap gap-3 px-3 text-slate-950 dark:text-zinc-300'>
+            {post.tags.map((tag) => (
+              <li
+                key={tag.id}
+                className='list-none rounded-full border border-zinc-200 px-3 py-1 dark:border-slate-800'
+              >
+                #{tag.name}
+              </li>
+            ))}
+          </div>
         )}
       </article>
       <ContactMe />

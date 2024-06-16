@@ -1,5 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import { resizeImage } from '@/utils/image';
 import { CoverImage } from './CoverImage';
@@ -44,14 +42,9 @@ export const SingleBlog = (props: SingleBlogProps) => {
         <h3 className='line-clamp-2 text-xl font-semibold dark:text-zinc-100'>
           {title}
         </h3>
-        <p className='line-clamp-3 text-justify text-sm leading-snug text-slate-500 lg:mb-8 dark:text-zinc-300'>
+        <p className='line-clamp-3 text-justify text-sm leading-snug text-slate-500 dark:text-zinc-300'>
           {brief}
         </p>
-        <FontAwesomeIcon
-          icon={faArrowRight}
-          size='lg'
-          className='absolute bottom-1 right-1 hidden lg:group-hover:block dark:text-zinc-300'
-        />
       </article>
     </Link>
   );

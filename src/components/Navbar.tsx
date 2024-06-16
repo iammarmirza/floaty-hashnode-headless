@@ -28,8 +28,8 @@ const NAVLINKS = [
     activeIcon: <NewspaperIconSolid className='h-6 w-6' />,
   },
   {
-    name: 'Project',
-    href: '/project',
+    name: 'Projects',
+    href: '/projects',
     icon: <CogIconOutline className='h-6 w-6' />,
     activeIcon: <CogIconSolid className='h-6 w-6' />,
   },
