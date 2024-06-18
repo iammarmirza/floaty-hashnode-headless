@@ -17,7 +17,7 @@ export const AboutMe = () => {
   const isAvailableLink =
     publication.links?.linkedin || publication.links?.twitter;
   return (
-    <div className='flex w-full flex-col items-center gap-7 rounded-3xl bg-white p-6 shadow-md sm:flex-row dark:border dark:border-slate-800 dark:bg-slate-900'>
+    <div className='flex w-full flex-col items-center gap-7 rounded-3xl bg-white p-4 shadow-md sm:flex-row dark:border dark:border-slate-800 dark:bg-slate-900'>
       {publication.author.profilePicture && (
         <div className='flex aspect-square w-full overflow-hidden rounded-xl sm:max-w-52'>
           <Image
@@ -30,7 +30,7 @@ export const AboutMe = () => {
         </div>
       )}
 
-      <div className='flex max-w-full flex-1 flex-col justify-between'>
+      <div className='flex max-w-full flex-1 flex-col'>
         <div className='mb-4 flex w-full flex-col items-center justify-between gap-2 sm:flex-row lg:gap-0'>
           {isAvailableLink && (
             <a
@@ -52,8 +52,8 @@ export const AboutMe = () => {
           )}
           <SocialLinks />
         </div>
-        <div className='mb-4 flex flex-col gap-2'>
-          <p className='w-full text-2xl font-semibold text-slate-950 sm:text-3xl dark:text-zinc-100'>{`Hi There! I am ${publication.author.name}!`}</p>
+        <div className='mb-4 mr-4 flex flex-col gap-3'>
+          <h1 className='w-full text-2xl font-semibold text-slate-950 sm:text-3xl dark:text-zinc-100'>{`Hi There! I am ${publication.author.name}!`}</h1>
           {publication.author.bio && (
             <div
               className='text-justify text-slate-500 lg:text-left dark:text-zinc-300'

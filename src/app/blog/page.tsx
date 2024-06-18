@@ -48,9 +48,9 @@ export default function Blog() {
     gap: 15,
   });
 
-  useEffect(() => {
-    const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
+  const [lastItem] = [...rowVirtualizer.getVirtualItems()].reverse();
 
+  useEffect(() => {
     if (!lastItem) {
       return;
     }
@@ -67,7 +67,7 @@ export default function Blog() {
     fetchNextPage,
     posts.length,
     isFetchingNextPage,
-    rowVirtualizer.getVirtualItems(),
+    lastItem
   ]);
 
   return (
@@ -85,7 +85,7 @@ export default function Blog() {
         {posts.length > 0 && (
           <div
             ref={parentRef}
-            className='flex h-[400px] w-full flex-col overflow-auto rounded-lg px-5'
+            className='flex max-h-[500px] w-full flex-col overflow-auto rounded-lg px-5'
           >
             <div
               className='relative w-full'
@@ -108,8 +108,14 @@ export default function Blog() {
                     }}
                   >
                     <Post postInfo={post} />
-                    {isLoaderRow && hasNextPage && 'Loading...'}
-                    {!hasNextPage && isLoaderRow && 'You have reached the end'}
+                    {isLoaderRow && hasNextPage && (
+                      <p className='w-full text-center'>Loading...</p>
+                    )}
+                    {!hasNextPage && isLoaderRow && (
+                      <p className='w-full text-center'>
+                        You have reached the end
+                      </p>
+                    )}
                   </div>
                 );
               })}

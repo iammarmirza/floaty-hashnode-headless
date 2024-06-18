@@ -50,7 +50,7 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
       triggerCustomWidgetEmbed(post.id.toString());
       setCanLoadEmbeds(true);
     })();
-  }, []);
+  }, [data, post.id]);
 
   if (post.hasLatexInPost) {
     setTimeout(() => {
@@ -81,7 +81,10 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
             />
           )}
           <div className='flex w-full flex-wrap items-center justify-center text-sm italic'>
-            Article by&nbsp; <span className='font-medium'>{post.author.name}</span> &nbsp; &#x2022; &nbsp;Published on&nbsp; <time className='font-medium'>{formatDate(post.publishedAt)}</time>
+            Article by&nbsp;{' '}
+            <span className='font-medium'>{post.author.name}</span> &nbsp;
+            &#x2022; &nbsp;Published on&nbsp;{' '}
+            <time className='font-medium'>{formatDate(post.publishedAt)}</time>
           </div>
         </div>
 
@@ -94,7 +97,7 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
             {post.tags.map((tag) => (
               <li
                 key={tag.id}
-                className='list-none rounded-full border border-zinc-200 px-3 py-1 dark:border-slate-800 text-sm'
+                className='list-none rounded-full border border-zinc-200 px-3 py-1 text-sm dark:border-slate-800'
               >
                 #{tag.name}
               </li>

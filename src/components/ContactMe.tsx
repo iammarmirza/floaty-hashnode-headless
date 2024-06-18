@@ -1,6 +1,4 @@
-import { faCopyright } from '@fortawesome/free-solid-svg-icons';
 import { SocialLinks } from './SocialLinks';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 export const ContactMe = () => {
   return (
@@ -19,8 +17,7 @@ export const ContactMe = () => {
         </a>
       </p>
       <p className='flex items-center gap-1 text-sm text-slate-500 dark:text-zinc-300'>
-        <FontAwesomeIcon icon={faCopyright} />
-        Copyright 2024. All rights reserved.
+        &copy; Ammar Mirza 2024
       </p>
     </footer>
   );
