@@ -1,6 +1,5 @@
 'use client';
 import Image from 'next/image';
-import { SocialLinks } from './SocialLinks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { usePublicationQuery } from '../../generated/graphq';
@@ -50,7 +49,6 @@ export const AboutMe = () => {
               &#8226; Available
             </a>
           )}
-          <SocialLinks />
         </div>
         <div className='mb-4 mr-4 flex flex-col gap-3'>
           <h1 className='w-full text-2xl font-semibold text-slate-950 sm:text-3xl dark:text-zinc-100'>{`Hi There! I am ${publication.author.name}!`}</h1>

@@ -2,6 +2,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { formatDate } from '@/utils/consts/format-date';
 import { ArrowTrendingUpIcon, ClockIcon } from '@heroicons/react/24/outline';
+import { ImagePlaceholder } from './ImagePlaceholder';
+import { resizeImage } from '@/utils/image';
+import { getBlurDataUrl } from '@/utils/getBlurDataUrl';
 
 interface PostProps {
   postInfo:
@@ -28,22 +31,36 @@ export const Post = (props: PostProps) => {
 
   if (!postInfo) return null;
 
+  const postImageSrc = postInfo.coverImage?.url
+    ? resizeImage(postInfo.coverImage.url, {
+        w: 1040,
+        h: 585,
+        c: 'cover',
+      })
+    : undefined;
+
+  const blurDataURL = postImageSrc && getBlurDataUrl(postImageSrc);
+
   return (
     <Link
       href={`/blog/${postInfo.slug}`}
       className='flex w-full flex-col items-center gap-4 rounded-xl border border-zinc-100 px-2 py-2 hover:border-zinc-200 sm:flex-row dark:border-slate-800 dark:hover:border-slate-700'
     >
-      {postInfo.coverImage?.url && (
-        <div className='flex aspect-video w-full overflow-hidden rounded-lg sm:max-w-52'>
+      <div className='flex aspect-video w-full overflow-hidden rounded-lg sm:max-w-52'>
+        {postInfo.coverImage?.url ? (
           <Image
-            src={postInfo.coverImage.url}
+            src={postImageSrc}
             alt='Post Image'
-            width={200}
-            height={200}
+            width={1040}
+            height={585}
             className='flex-1'
+            placeholder='blur'
+            blurDataURL={blurDataURL}
           />
-        </div>
-      )}
+        ) : (
+          <ImagePlaceholder />
+        )}
+      </div>
       <div className='flex w-full flex-col px-3 text-slate-950 dark:text-zinc-300'>
         <h3 className='mb-5 line-clamp-3 text-xl font-semibold md:text-2xl dark:text-zinc-100'>
           {postInfo.title}

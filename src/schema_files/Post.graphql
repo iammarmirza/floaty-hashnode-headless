@@ -17,6 +17,7 @@ query Post($host: String, $slug: String!) {
       tags {
         id
         name
+        slug
       }
       ogMetaData {
         image

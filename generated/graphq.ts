@@ -913,6 +913,18 @@ export type CreateDraftTagInput = {
   slug?: InputMaybe<Scalars['String']['input']>;
 };
 
+export type CreateRedirectionRuleInput = {
+  destination: Scalars['URL']['input'];
+  publicationId: Scalars['ID']['input'];
+  source: Scalars['String']['input'];
+  type: HttpRedirectionType;
+};
+
+export type CreateRedirectionRulePayload = {
+  __typename?: 'CreateRedirectionRulePayload';
+  redirectionRule: RedirectionRule;
+};
+
 /** Input to create a role based invite for a publication. */
 export type CreateRoleBasedInviteForPublicationInput = {
   /** The capacity of how many members to be invited by the link. */
@@ -1726,6 +1738,7 @@ export type Mutation = {
   changePublicationMemberVisibility: ChangePublicationMemberVisibilityPayload;
   /** Creates a new draft for a post. */
   createDraft: CreateDraftPayload;
+  createRedirectionRule: CreateRedirectionRulePayload;
   /** Creates a role based invite for a publication and returns a link to invite users to a publication. */
   createRoleBasedInviteForPublication: CreateRoleBasedInviteForPublicationPayload;
   /** Creates a new series. */
@@ -1756,6 +1769,7 @@ export type Mutation = {
   /** Removes a user from a teams publication. */
   removePublicationMember: RemovePublicationMemberPayload;
   removeRecommendation: RemoveRecommendationPayload;
+  removeRedirectionRule: RemoveRedirectionRulePayload;
   /** Removes a reply from a comment. */
   removeReply: RemoveReplyPayload;
   /** Removes a series. */
@@ -1785,6 +1799,7 @@ export type Mutation = {
   /** Updates a comment on a post. */
   updateComment: UpdateCommentPayload;
   updatePost: UpdatePostPayload;
+  updateRedirectionRule: UpdateRedirectionRulePayload;
   /** Updates a reply */
   updateReply: UpdateReplyPayload;
   /** Updates a role based invite for a publication. */
@@ -1828,6 +1843,10 @@ export type MutationChangePublicationMemberVisibilityArgs = {
 
 export type MutationCreateDraftArgs = {
   input: CreateDraftInput;
+};
+
+export type MutationCreateRedirectionRuleArgs = {
+  input: CreateRedirectionRuleInput;
 };
 
 export type MutationCreateRoleBasedInviteForPublicationArgs = {
@@ -1898,6 +1917,10 @@ export type MutationRemoveRecommendationArgs = {
   input: RemoveRecommendationInput;
 };
 
+export type MutationRemoveRedirectionRuleArgs = {
+  input: RemoveRedirectionRuleInput;
+};
+
 export type MutationRemoveReplyArgs = {
   input: RemoveReplyInput;
 };
@@ -1957,6 +1980,10 @@ export type MutationUpdateCommentArgs = {
 
 export type MutationUpdatePostArgs = {
   input: UpdatePostInput;
+};
+
+export type MutationUpdateRedirectionRuleArgs = {
+  input: UpdateRedirectionRuleInput;
 };
 
 export type MutationUpdateReplyArgs = {
@@ -2109,7 +2136,7 @@ export type NewsletterRecord = Node & {
   /** The number of subscribers the newsletter was opened by. */
   openCount: Scalars['Int']['output'];
   /** Associated post it was sent with */
-  post: Post;
+  post?: Maybe<Post>;
   /** The date the newsletter was sent. */
   sentAt: Scalars['DateTime']['output'];
   /** The number of subscribers the newsletter was sent to. */
@@ -3363,6 +3390,16 @@ export type RemoveRecommendationPayload = {
   recommendedPublication: Publication;
 };
 
+export type RemoveRedirectionRuleInput = {
+  id: Scalars['ID']['input'];
+  publicationId: Scalars['ID']['input'];
+};
+
+export type RemoveRedirectionRulePayload = {
+  __typename?: 'RemoveRedirectionRulePayload';
+  redirectionRule: RedirectionRule;
+};
+
 export type RemoveReplyInput = {
   commentId: Scalars['ID']['input'];
   replyId: Scalars['ID']['input'];
@@ -3990,6 +4027,19 @@ export type UpdatePostSettingsInput = {
   pinToBlog?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+export type UpdateRedirectionRuleInput = {
+  destination?: InputMaybe<Scalars['URL']['input']>;
+  id: Scalars['ID']['input'];
+  publicationId: Scalars['ID']['input'];
+  source?: InputMaybe<Scalars['String']['input']>;
+  type?: InputMaybe<HttpRedirectionType>;
+};
+
+export type UpdateRedirectionRulePayload = {
+  __typename?: 'UpdateRedirectionRulePayload';
+  redirectionRule: RedirectionRule;
+};
+
 export type UpdateReplyInput = {
   commentId: Scalars['ID']['input'];
   contentMarkdown: Scalars['String']['input'];
@@ -4512,7 +4562,12 @@ export type PostQuery = {
       readTimeInMinutes: number;
       reactionCount: number;
       hasLatexInPost: boolean;
-      tags?: Array<{ __typename?: 'Tag'; id: string; name: string }> | null;
+      tags?: Array<{
+        __typename?: 'Tag';
+        id: string;
+        name: string;
+        slug: string;
+      }> | null;
       ogMetaData?: {
         __typename?: 'OpenGraphMetaData';
         image?: string | null;
@@ -4665,6 +4720,7 @@ export const PostDocument = `
       tags {
         id
         name
+        slug
       }
       ogMetaData {
         image

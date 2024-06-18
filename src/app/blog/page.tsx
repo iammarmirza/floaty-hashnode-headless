@@ -62,13 +62,7 @@ export default function Blog() {
     ) {
       fetchNextPage();
     }
-  }, [
-    hasNextPage,
-    fetchNextPage,
-    posts.length,
-    isFetchingNextPage,
-    lastItem
-  ]);
+  }, [hasNextPage, fetchNextPage, posts.length, isFetchingNextPage, lastItem]);
 
   return (
     <Container>
