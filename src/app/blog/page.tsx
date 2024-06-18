@@ -34,7 +34,7 @@ export default function Blog() {
       }
     );
 
-  if (!data || error) throw new Error();
+  if (!data || error) throw error;
 
   const posts =
     data.pages.flatMap((page) => page.publication?.postsViaPage.nodes) || [];

@@ -19,7 +19,7 @@ export default function StaticPage({ params }: { params: { slug: string } }) {
     }),
   });
 
-  if (!data || error) throw new Error();
+  if (!data || error) throw error;
   const staticPage = data.publication?.staticPage;
   if (!staticPage) notFound();
 
@@ -29,7 +29,7 @@ export default function StaticPage({ params }: { params: { slug: string } }) {
         <h1 className='mb-6 w-full text-center text-3xl font-semibold text-slate-950 md:text-4xl dark:text-zinc-100'>
           {staticPage.title}
         </h1>
-        <hr className='mx-5 mb-6 h-px border-0 bg-slate-800' />
+        <hr className='mb-6 h-px border-0 bg-slate-800' />
         <MarkdownToHtml contentMarkdown={staticPage.content.markdown} />
       </div>
       <ContactMe />

@@ -28,7 +28,7 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
     }),
   });
 
-  if (!data || error) throw new Error();
+  if (!data || error) throw error;
   const post = data.publication?.post;
   if (!post) notFound();
 
@@ -80,24 +80,21 @@ export default function BlogContent({ params }: { params: { slug: string } }) {
               src={coverImageSrc}
             />
           )}
-          <div className='flex w-full flex-wrap items-center justify-center text-sm'>
-            <span className='mr-4'>Written by: {post.author.name}</span>
-            <span>
-              Posted on <time>{formatDate(post.publishedAt)}</time>
-            </span>
+          <div className='flex w-full flex-wrap items-center justify-center text-sm italic'>
+            Article by&nbsp; <span className='font-medium'>{post.author.name}</span> &nbsp; &#x2022; &nbsp;Published on&nbsp; <time className='font-medium'>{formatDate(post.publishedAt)}</time>
           </div>
         </div>
 
-        <hr className='mx-5 mb-6 h-px border-0 bg-zinc-200 dark:bg-slate-800' />
+        <hr className='mb-6 h-px border-0 bg-zinc-200 dark:bg-slate-800' />
         {post.content.markdown && (
           <MarkdownToHtml contentMarkdown={post.content.markdown} />
         )}
-        {post.tags && (
-          <div className='flex w-full flex-wrap gap-3 px-3 text-slate-950 dark:text-zinc-300'>
+        {post.tags?.length && (
+          <div className='flex w-full flex-wrap gap-3 text-slate-950 dark:text-zinc-300'>
             {post.tags.map((tag) => (
               <li
                 key={tag.id}
-                className='list-none rounded-full border border-zinc-200 px-3 py-1 dark:border-slate-800'
+                className='list-none rounded-full border border-zinc-200 px-3 py-1 dark:border-slate-800 text-sm'
               >
                 #{tag.name}
               </li>
