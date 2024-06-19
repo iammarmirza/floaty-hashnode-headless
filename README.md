@@ -1,4 +1,4 @@
-# Floaty Hashnode Headless (Template)
+# Floaty Hashnode Headless
 
 Floaty is a portfolio template inspired by Hashnode Headless cooked in NextJs 14.
 
